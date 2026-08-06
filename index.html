@@ -222,6 +222,7 @@
   .job-metric{background:var(--surface-2); border:1px solid var(--border); border-radius:12px; padding:14px 12px; text-align:center; backdrop-filter:var(--glass-blur); -webkit-backdrop-filter:var(--glass-blur);}
   .job-metric .num{font-size:19px; font-weight:700; color:var(--text); font-family:var(--serif); font-style:italic;}
   .job-metric .lbl{font-size:10px; color:var(--text-mute); text-transform:uppercase; letter-spacing:.04em; margin-top:4px;}
+  .job-metrics.cols-3{grid-template-columns:repeat(3,minmax(0,1fr));}
   .job ul{padding-left:18px; color:var(--text-dim); font-size:13.5px; display:flex; flex-direction:column; gap:9px; margin-bottom:18px;}
   .job ul li::marker{color:var(--accent-green);}
   @media(max-width:700px){ .job-metrics{grid-template-columns:repeat(2,minmax(0,1fr));} .job-head{padding:18px;} }
@@ -297,6 +298,12 @@
   .tech-tile{background:var(--bg-card); border:1px solid var(--border); border-radius:14px; padding:20px 10px; text-align:center; backdrop-filter:var(--glass-blur); -webkit-backdrop-filter:var(--glass-blur); transition:transform .3s ease, box-shadow .3s ease; box-shadow:inset 0 1px 0 rgba(255,255,255,.07);}
   .tech-tile:hover{transform:translateY(-4px); box-shadow:0 18px 34px -14px rgba(80,110,60,.5);}
   .tech-tile.tech-hidden{display:none;}
+  @keyframes tileCurtain{
+    0%{opacity:0; transform:translateY(-24px) scale(.92);}
+    65%{opacity:1; transform:translateY(4px) scale(1.02);}
+    100%{opacity:1; transform:translateY(0) scale(1);}
+  }
+  .tech-tile.tile-drop{animation:tileCurtain .5s cubic-bezier(.22,.85,.32,1) both;}
   .tech-icon{width:44px; height:44px; border-radius:12px; margin:0 auto 12px; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:800; color:#171c10; letter-spacing:.01em;}
   .tech-label{font-size:11.5px; color:var(--text-dim); font-weight:500;}
   .tech-count{margin-top:26px; text-align:center; font-size:12px; color:var(--text-mute); letter-spacing:.03em;}
@@ -332,6 +339,25 @@
   .case-milestones{display:flex; flex-direction:column; gap:11px; margin-bottom:24px; padding:0; list-style:none;}
   .case-milestones li{display:flex; gap:10px; font-size:13.5px; color:var(--text-dim); line-height:1.55;}
   .case-milestones li::before{content:"✓"; color:var(--accent-green); flex:none; font-weight:700;}
+
+  /* ---------- Project slideshow (multi-slide case study) ---------- */
+  .slides-box{max-width:720px;}
+  .slideshow{min-height:300px; position:relative;}
+  .slide{display:none;}
+  .slide.active{display:block; animation:slideFadeIn .45s cubic-bezier(.22,.85,.32,1);}
+  @keyframes slideFadeIn{0%{opacity:0; transform:translateX(22px);} 100%{opacity:1; transform:translateX(0);}}
+  .slide-eyebrow{font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--text-mute); margin-bottom:14px;}
+  .slide-nav{display:flex; align-items:center; justify-content:space-between; margin-top:26px; padding-top:20px; border-top:1px solid var(--border);}
+  .slide-dots{display:flex; gap:8px;}
+  .slide-dot{width:8px; height:8px; border-radius:50%; background:var(--surface-2); border:1px solid var(--border); cursor:pointer; padding:0; transition:background .25s ease, transform .25s ease;}
+  .slide-dot.active{background:linear-gradient(135deg,#f3e3b8,#e7c37a); border-color:transparent; transform:scale(1.35);}
+  .slide-arrow{width:38px; height:38px; border-radius:50%; border:1px solid var(--border); background:var(--surface-1); backdrop-filter:var(--glass-blur); -webkit-backdrop-filter:var(--glass-blur); display:flex; align-items:center; justify-content:center; cursor:pointer; color:var(--text-dim); font-size:17px; transition:all .25s ease;}
+  .slide-arrow:hover{background:var(--surface-2); color:var(--text); border-color:var(--accent-green);}
+  .slide-counter{font-size:11px; color:var(--text-mute); letter-spacing:.04em;}
+
+  /* ---------- Trimmed project card: banner + key metrics + slideshow CTA ---------- */
+  .proj-cta-note{font-size:11.5px; color:var(--text-mute); margin-top:10px;}
+  .proj-slides-btn{display:inline-flex; align-items:center; gap:8px;}
 
   .edu{margin-top:36px; max-width:500px;}
   .edu .deg{font-family:var(--serif); font-style:italic; font-size:22px; color:var(--text);}
@@ -651,48 +677,66 @@
           <div class="tag">Generative AI &amp; LLM engineering</div>
           <h3>Enterprise Generative AI knowledge assistant</h3>
           <p class="sub">RAG assistant, vector search &amp; LLM evaluation with MLflow</p>
-          <p class="narrative">High query volume and scattered internal documentation slowed enterprise decision-making. I designed a production RAG assistant that retrieves grounded context before generation, so every answer is traceable to a source and trusted by both leadership and compliance reviewers.</p>
-          <div class="metrics">
-            <div class="metric"><div class="num">96.4%</div><div class="lbl">Retrieval accuracy</div></div>
-            <div class="metric"><div class="num">Sub-sec</div><div class="lbl">Query speed</div></div>
-            <div class="metric"><div class="num">100%</div><div class="lbl">Eval tracking</div></div>
+          <div class="job-metrics cols-3">
+            <div class="job-metric"><div class="num">96.4%</div><div class="lbl">Retrieval accuracy</div></div>
+            <div class="job-metric"><div class="num">Sub-sec</div><div class="lbl">Query speed</div></div>
+            <div class="job-metric"><div class="num">100%</div><div class="lbl">Eval tracking</div></div>
           </div>
-          <ul>
-            <li>Architected a LangChain &amp; LlamaIndex RAG pipeline with vector search, achieving 96.4% retrieval accuracy across enterprise knowledge sources.</li>
-            <li>Built a Python FastAPI service for semantic chunking, embedding generation, and low-latency retrieval, keeping query response times sub-second at scale.</li>
-            <li>Implemented MLflow tracking for prompt versions, retrieval configs, and evaluation runs, giving 100% traceability across every LLM experiment.</li>
-            <li>Grounded every generated answer with source context attribution, reducing hallucination risk for enterprise decision-makers.</li>
-            <li>Designed evaluation harnesses to benchmark answer relevance, faithfulness, and latency before each production release.</li>
-            <li>Partnered with platform and compliance teams to define guardrails, access controls, and audit logging for enterprise-safe deployment.</li>
-          </ul>
-          <div class="chips">
-            <span class="chip">LangChain</span><span class="chip">LlamaIndex</span><span class="chip">Vector Search</span><span class="chip">Python</span><span class="chip">FastAPI</span><span class="chip">MLflow</span><span class="chip">RAG Pipelines</span><span class="chip">LLM Evaluation</span>
-          </div>
-          <button class="btn btn-outline" style="margin-top:20px;" onclick="openModal('case1')">Launch Case Study</button>
+          <button class="btn btn-solid proj-slides-btn" style="margin-top:22px;" onclick="openModal('slides1')"><span>▶</span> View Project Slides</button>
+          <div class="proj-cta-note">4 slides &middot; overview, impact, and full engineering breakdown</div>
         </div>
       </div>
 
-      <div class="modal-overlay" id="case1" onclick="if(event.target===this) closeModal('case1')">
-        <div class="modal-box">
-          <div class="modal-close" onclick="closeModal('case1')">✕</div>
-          <div class="modal-eyebrow">FLAGSHIP &middot; 01 &nbsp;&middot;&nbsp; <span class="cat">Detailed Engineering Case Study</span></div>
-          <div class="modal-title">Enterprise Generative AI knowledge assistant</div>
-          <div class="modal-issuer" style="margin-bottom:22px;">RAG assistant, vector search &amp; LLM evaluation with MLflow</div>
-          <div class="case-cards">
-            <div class="case-card"><div class="n">1. The Challenge</div><p>High query volume and scattered internal documentation slowed enterprise decision-making, with no reliable way to trace answers back to source material.</p></div>
-            <div class="case-card"><div class="n">2. Architecture Solution</div><p>Designed a LangChain &amp; LlamaIndex RAG pipeline with vector search and a Python FastAPI retrieval service, tracked end-to-end with MLflow.</p></div>
-            <div class="case-card"><div class="n">3. System Impact</div><p>Achieved 96.4% retrieval accuracy and sub-second query speed while keeping every LLM experiment traceable and every answer grounded in source context.</p></div>
+      <div class="modal-overlay" id="slides1" onclick="if(event.target===this) closeModal('slides1')">
+        <div class="modal-box slides-box">
+          <div class="modal-close" onclick="closeModal('slides1')">✕</div>
+          <div class="slide-eyebrow">FLAGSHIP &middot; 01 &nbsp;&middot;&nbsp; <span class="cat" style="color:var(--accent);">Project Slides</span></div>
+          <div class="slideshow" id="slideshow-slides1">
+            <div class="slide active">
+              <div class="modal-head">
+                <div class="modal-icon">🧠</div>
+                <div><div class="modal-title">Enterprise Generative AI knowledge assistant</div><div class="modal-issuer">RAG assistant, vector search &amp; LLM evaluation with MLflow</div></div>
+              </div>
+              <div class="modal-box-inner"><div class="lbl">Overview</div><p>High query volume and scattered internal documentation slowed enterprise decision-making. I designed a production RAG assistant that retrieves grounded context before generation, so every answer is traceable to a source and trusted by both leadership and compliance reviewers.</p></div>
+            </div>
+            <div class="slide">
+              <div class="modal-comp-lbl">Impact Metrics</div>
+              <div class="job-metrics cols-3" style="margin-bottom:8px;">
+                <div class="job-metric"><div class="num">96.4%</div><div class="lbl">Retrieval accuracy</div></div>
+                <div class="job-metric"><div class="num">Sub-sec</div><div class="lbl">Query speed</div></div>
+                <div class="job-metric"><div class="num">100%</div><div class="lbl">Eval tracking</div></div>
+              </div>
+            </div>
+            <div class="slide">
+              <div class="modal-comp-lbl">Engineering Deliverables &middot; Part 1</div>
+              <ul class="case-milestones">
+                <li>Architected a LangChain &amp; LlamaIndex RAG pipeline with vector search, achieving 96.4% retrieval accuracy across enterprise knowledge sources.</li>
+                <li>Built a Python FastAPI service for semantic chunking, embedding generation, and low-latency retrieval, keeping query response times sub-second at scale.</li>
+                <li>Implemented MLflow tracking for prompt versions, retrieval configs, and evaluation runs, giving 100% traceability across every LLM experiment.</li>
+              </ul>
+            </div>
+            <div class="slide">
+              <div class="modal-comp-lbl">Engineering Deliverables &middot; Part 2</div>
+              <ul class="case-milestones">
+                <li>Grounded every generated answer with source context attribution, reducing hallucination risk for enterprise decision-makers.</li>
+                <li>Designed evaluation harnesses to benchmark answer relevance, faithfulness, and latency before each production release.</li>
+                <li>Partnered with platform and compliance teams to define guardrails, access controls, and audit logging for enterprise-safe deployment.</li>
+              </ul>
+              <div class="modal-comp-lbl" style="margin-top:18px;">Tech Stack</div>
+              <div class="chips">
+                <span class="chip">LangChain</span><span class="chip">LlamaIndex</span><span class="chip">Vector Search</span><span class="chip">Python</span><span class="chip">FastAPI</span><span class="chip">MLflow</span><span class="chip">RAG Pipelines</span><span class="chip">LLM Evaluation</span>
+              </div>
+            </div>
           </div>
-          <div class="modal-comp-lbl">Implementation Milestones &amp; System Architecture</div>
-          <ul class="case-milestones">
-            <li>Architected a LangChain &amp; LlamaIndex RAG pipeline with vector search, achieving 96.4% retrieval accuracy across enterprise knowledge sources.</li>
-            <li>Built a Python FastAPI service for semantic chunking, embedding generation, and low-latency retrieval, keeping query response sub-second at scale.</li>
-            <li>Implemented MLflow tracking for prompt versions, retrieval configs, and evaluation runs for full experiment traceability.</li>
-            <li>Grounded every generated answer with source context attribution, reducing hallucination risk for enterprise decision-makers.</li>
-          </ul>
-          <div class="modal-footer">
-            <div class="modal-status">✓ Verified Engineering Deliverable</div>
-            <button class="btn btn-solid" onclick="closeModal('case1')">Close Case Study</button>
+          <div class="slide-nav">
+            <button class="slide-arrow" onclick="prevSlide('slides1')" aria-label="Previous slide">‹</button>
+            <div class="slide-dots" id="dots-slides1">
+              <button class="slide-dot active" onclick="goToSlide('slides1',0)" aria-label="Slide 1"></button>
+              <button class="slide-dot" onclick="goToSlide('slides1',1)" aria-label="Slide 2"></button>
+              <button class="slide-dot" onclick="goToSlide('slides1',2)" aria-label="Slide 3"></button>
+              <button class="slide-dot" onclick="goToSlide('slides1',3)" aria-label="Slide 4"></button>
+            </div>
+            <button class="slide-arrow" onclick="nextSlide('slides1')" aria-label="Next slide">›</button>
           </div>
         </div>
       </div>
@@ -716,47 +760,66 @@
           <div class="tag">Deep learning &amp; NLP</div>
           <h3>NLP claim review &amp; member communication intelligence</h3>
           <p class="sub">Fine-tuned BERT models, NER &amp; healthcare text analytics</p>
-          <p class="narrative">A high volume of unstructured claim notes and member communications required manual review, creating processing bottlenecks and inconsistent categorization. I fine-tuned BERT-based models to automatically classify and extract structured signal from free-text healthcare records, cutting review time while keeping results auditable.</p>
-          <div class="metrics">
-            <div class="metric"><div class="num">94.2%</div><div class="lbl">Categorization acc.</div></div>
-            <div class="metric"><div class="num">+40%</div><div class="lbl">Review efficiency</div></div>
-            <div class="metric"><div class="num">Auto</div><div class="lbl">Entity extraction</div></div>
+          <div class="job-metrics cols-3">
+            <div class="job-metric"><div class="num">94.2%</div><div class="lbl">Categorization acc.</div></div>
+            <div class="job-metric"><div class="num">+40%</div><div class="lbl">Review efficiency</div></div>
+            <div class="job-metric"><div class="num">Auto</div><div class="lbl">Entity extraction</div></div>
           </div>
-          <ul>
-            <li>Fine-tuned BERT transformer models with PyTorch &amp; Hugging Face to classify claim notes into clinical, billing, eligibility, and service categories at 94.2% accuracy.</li>
-            <li>Built NER and embedding extraction pipelines to surface entities from unstructured care notes that were previously reviewed manually.</li>
-            <li>Automated multi-class categorization for clinical, billing, and service-related communications, cutting manual review effort by 40%.</li>
-            <li>Evaluated model outputs through precision-recall analysis, classification reports, and segment-level error review to build reviewer trust.</li>
-            <li>Reduced processing bottlenecks by replacing manual triage with automated, explainable text classification.</li>
-            <li>Partnered with healthcare operations and QA teams to validate categorization accuracy against HIPAA-aligned review standards.</li>
-          </ul>
-          <div class="chips">
-            <span class="chip">PyTorch</span><span class="chip">Hugging Face</span><span class="chip">BERT</span><span class="chip">Named Entity Recognition</span><span class="chip">Embeddings</span><span class="chip">Python</span><span class="chip">Precision-Recall</span>
-          </div>
-          <button class="btn btn-outline" style="margin-top:20px;" onclick="openModal('case2')">Launch Case Study</button>
+          <button class="btn btn-solid proj-slides-btn" style="margin-top:22px;" onclick="openModal('slides2')"><span>▶</span> View Project Slides</button>
+          <div class="proj-cta-note">4 slides &middot; overview, impact, and full engineering breakdown</div>
         </div>
       </div>
 
-      <div class="modal-overlay" id="case2" onclick="if(event.target===this) closeModal('case2')">
-        <div class="modal-box">
-          <div class="modal-close" onclick="closeModal('case2')">✕</div>
-          <div class="modal-eyebrow">FLAGSHIP &middot; 02 &nbsp;&middot;&nbsp; <span class="cat">Detailed Engineering Case Study</span></div>
-          <div class="modal-title">NLP claim review &amp; member communication intelligence</div>
-          <div class="modal-issuer" style="margin-bottom:22px;">Fine-tuned BERT models, NER &amp; healthcare text analytics</div>
-          <div class="case-cards">
-            <div class="case-card"><div class="n">1. The Challenge</div><p>High volume of unstructured claim notes and member communications required manual review, leading to processing bottlenecks and inconsistent categorization.</p></div>
-            <div class="case-card"><div class="n">2. Architecture Solution</div><p>Fine-tuned BERT transformer models with PyTorch and Hugging Face for automated multi-class classification and Named Entity Recognition.</p></div>
-            <div class="case-card"><div class="n">3. System Impact</div><p>Achieved 94.2% classification accuracy and 40% faster claim review throughput while automating critical entity extraction.</p></div>
+      <div class="modal-overlay" id="slides2" onclick="if(event.target===this) closeModal('slides2')">
+        <div class="modal-box slides-box">
+          <div class="modal-close" onclick="closeModal('slides2')">✕</div>
+          <div class="slide-eyebrow">FLAGSHIP &middot; 02 &nbsp;&middot;&nbsp; <span class="cat" style="color:var(--accent);">Project Slides</span></div>
+          <div class="slideshow" id="slideshow-slides2">
+            <div class="slide active">
+              <div class="modal-head">
+                <div class="modal-icon">📋</div>
+                <div><div class="modal-title">NLP claim review &amp; member communication intelligence</div><div class="modal-issuer">Fine-tuned BERT models, NER &amp; healthcare text analytics</div></div>
+              </div>
+              <div class="modal-box-inner"><div class="lbl">Overview</div><p>A high volume of unstructured claim notes and member communications required manual review, creating processing bottlenecks and inconsistent categorization. I fine-tuned BERT-based models to automatically classify and extract structured signal from free-text healthcare records, cutting review time while keeping results auditable.</p></div>
+            </div>
+            <div class="slide">
+              <div class="modal-comp-lbl">Impact Metrics</div>
+              <div class="job-metrics cols-3" style="margin-bottom:8px;">
+                <div class="job-metric"><div class="num">94.2%</div><div class="lbl">Categorization acc.</div></div>
+                <div class="job-metric"><div class="num">+40%</div><div class="lbl">Review efficiency</div></div>
+                <div class="job-metric"><div class="num">Auto</div><div class="lbl">Entity extraction</div></div>
+              </div>
+            </div>
+            <div class="slide">
+              <div class="modal-comp-lbl">Engineering Deliverables &middot; Part 1</div>
+              <ul class="case-milestones">
+                <li>Fine-tuned BERT transformer models with PyTorch &amp; Hugging Face to classify claim notes into clinical, billing, eligibility, and service categories at 94.2% accuracy.</li>
+                <li>Built NER and embedding extraction pipelines to surface entities from unstructured care notes that were previously reviewed manually.</li>
+                <li>Automated multi-class categorization for clinical, billing, and service-related communications, cutting manual review effort by 40%.</li>
+              </ul>
+            </div>
+            <div class="slide">
+              <div class="modal-comp-lbl">Engineering Deliverables &middot; Part 2</div>
+              <ul class="case-milestones">
+                <li>Evaluated model outputs through precision-recall analysis, classification reports, and segment-level error review to build reviewer trust.</li>
+                <li>Reduced processing bottlenecks by replacing manual triage with automated, explainable text classification.</li>
+                <li>Partnered with healthcare operations and QA teams to validate categorization accuracy against HIPAA-aligned review standards.</li>
+              </ul>
+              <div class="modal-comp-lbl" style="margin-top:18px;">Tech Stack</div>
+              <div class="chips">
+                <span class="chip">PyTorch</span><span class="chip">Hugging Face</span><span class="chip">BERT</span><span class="chip">Named Entity Recognition</span><span class="chip">Embeddings</span><span class="chip">Python</span><span class="chip">Precision-Recall</span>
+              </div>
+            </div>
           </div>
-          <div class="modal-comp-lbl">Implementation Milestones &amp; System Architecture</div>
-          <ul class="case-milestones">
-            <li>Fine-tuned BERT models with PyTorch and Hugging Face Transformers to classify claim notes and member-service text into clinical, billing, eligibility, and service-related categories.</li>
-            <li>Extracted entities from unstructured healthcare communication using Named Entity Recognition, embeddings, and Python text preprocessing.</li>
-            <li>Evaluated NLP outputs through precision-recall analysis, classification reports, and segment-level error review, building stronger trust in text classification results.</li>
-          </ul>
-          <div class="modal-footer">
-            <div class="modal-status">✓ Verified Engineering Deliverable</div>
-            <button class="btn btn-solid" onclick="closeModal('case2')">Close Case Study</button>
+          <div class="slide-nav">
+            <button class="slide-arrow" onclick="prevSlide('slides2')" aria-label="Previous slide">‹</button>
+            <div class="slide-dots" id="dots-slides2">
+              <button class="slide-dot active" onclick="goToSlide('slides2',0)" aria-label="Slide 1"></button>
+              <button class="slide-dot" onclick="goToSlide('slides2',1)" aria-label="Slide 2"></button>
+              <button class="slide-dot" onclick="goToSlide('slides2',2)" aria-label="Slide 3"></button>
+              <button class="slide-dot" onclick="goToSlide('slides2',3)" aria-label="Slide 4"></button>
+            </div>
+            <button class="slide-arrow" onclick="nextSlide('slides2')" aria-label="Next slide">›</button>
           </div>
         </div>
       </div>
@@ -1025,12 +1088,15 @@
     job.classList.toggle('open');
   }
 
-  // Shared modal system (case studies + credential exhibits)
+  // Shared modal system (case studies + credential exhibits + project slideshows)
   function openModal(id) {
     const el = document.getElementById(id);
     if (!el) return;
     el.classList.add('active');
     document.body.style.overflow = 'hidden';
+    if (document.getElementById('slideshow-' + id)) {
+      showSlide(id, 0);
+    }
   }
   function closeModal(id) {
     const el = document.getElementById(id);
@@ -1044,21 +1110,65 @@
         el.classList.remove('active');
       });
       document.body.style.overflow = '';
+      return;
+    }
+    const activeModal = document.querySelector('.modal-overlay.active');
+    if (activeModal && document.getElementById('slideshow-' + activeModal.id)) {
+      if (e.key === 'ArrowRight') nextSlide(activeModal.id);
+      if (e.key === 'ArrowLeft') prevSlide(activeModal.id);
     }
   });
 
-  // Tech Stack category filter
+  // Project slideshow navigation
+  const slideState = {};
+  function showSlide(id, idx) {
+    const container = document.getElementById('slideshow-' + id);
+    if (!container) return;
+    const slides = container.querySelectorAll('.slide');
+    const n = slides.length;
+    idx = ((idx % n) + n) % n;
+    slides.forEach((s, i) => s.classList.toggle('active', i === idx));
+    const dots = document.querySelectorAll('#dots-' + id + ' .slide-dot');
+    dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+    slideState[id] = idx;
+  }
+  function nextSlide(id) { showSlide(id, (slideState[id] || 0) + 1); }
+  function prevSlide(id) { showSlide(id, (slideState[id] || 0) - 1); }
+  function goToSlide(id, idx) { showSlide(id, idx); }
+
+  // Tech Stack category filter — cascading "curtain roll" reveal, one tile at a time
+  let techTimers = [];
   function techFilter(cat, btn) {
     document.querySelectorAll('.tf-pill').forEach(p => p.classList.remove('active'));
     btn.classList.add('active');
-    const tiles = document.querySelectorAll('.tech-tile');
-    let shown = 0;
+
+    techTimers.forEach(t => clearTimeout(t));
+    techTimers = [];
+
+    const tiles = Array.from(document.querySelectorAll('.tech-tile'));
+    const matches = tiles.filter(t => cat === 'all' || t.dataset.cat === cat);
+    const countEl = document.getElementById('techCount');
+
     tiles.forEach(t => {
-      const match = (cat === 'all' || t.dataset.cat === cat);
-      t.classList.toggle('tech-hidden', !match);
-      if (match) shown++;
+      t.classList.add('tech-hidden');
+      t.classList.remove('tile-drop');
     });
-    document.getElementById('techCount').textContent = 'Showing ' + shown + ' of ' + tiles.length + ' Technologies';
+
+    if (matches.length === 0) {
+      countEl.textContent = 'Showing 0 of ' + tiles.length + ' Technologies';
+      return;
+    }
+
+    countEl.textContent = 'Revealing 0 of ' + tiles.length + ' Technologies';
+    matches.forEach((t, i) => {
+      const timer = setTimeout(() => {
+        t.classList.remove('tech-hidden');
+        void t.offsetWidth; // restart animation
+        t.classList.add('tile-drop');
+        countEl.textContent = 'Showing ' + (i + 1) + ' of ' + tiles.length + ' Technologies';
+      }, i * 65);
+      techTimers.push(timer);
+    });
   }
 
   // Scroll-reveal for cards and headings
@@ -1127,6 +1237,20 @@
     });
   }, { threshold: 0.35, rootMargin: '-10% 0px -50% 0px' });
   spySections.forEach(sec => spyIo.observe(sec));
+
+  // Curtain-reveal the Tech Stack grid the first time it scrolls into view
+  const techSection = document.getElementById('skills');
+  if (techSection) {
+    const techIo = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          techFilter('all', document.querySelector('.tf-pill[data-cat="all"]'));
+          techIo.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+    techIo.observe(techSection);
+  }
 </script>
 
 </body>
