@@ -241,9 +241,66 @@
   @media(max-width:860px){ .proj-banner{height:240px;} .proj-banner .banner-node{font-size:10px; padding:5px 9px;} }
 
   .certs{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; margin-top:36px;}
+  .cert{display:flex; flex-direction:column;}
   .cert .verified{font-size:10px; color:var(--accent-green); text-transform:uppercase; letter-spacing:.06em; margin-bottom:8px;}
   .cert h3{font-family:var(--sans); font-style:normal; font-size:15px; font-weight:600; margin-bottom:4px; color:var(--text);}
   .cert .issuer{font-size:12px; color:var(--text-mute);}
+
+  /* ---------- Achievement Museum (certifications) ---------- */
+  .cert .exhibit-row{display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;}
+  .cert .exhibit-num{font-size:10px; letter-spacing:.1em; color:var(--text-mute); text-transform:uppercase; font-weight:600;}
+  .cert .verified-badge{font-size:9.5px; background:rgba(127,174,111,.15); border:1px solid var(--border); color:var(--accent-green); padding:4px 10px; border-radius:12px; display:inline-flex; align-items:center; gap:4px; text-transform:uppercase; letter-spacing:.05em; font-weight:700;}
+  .cert .cert-tags{display:flex; flex-wrap:wrap; gap:6px; margin:12px 0 18px;}
+  .cert .cert-tags span{font-size:10.5px; background:rgba(255,255,255,.05); border:1px solid var(--border); padding:4px 9px; border-radius:12px; color:var(--text-dim);}
+  .cert .cert-actions{display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--border); padding-top:14px; margin-top:auto;}
+  .cert .cert-actions button{background:none; border:none; color:var(--text-dim); font-size:11.5px; font-weight:700; letter-spacing:.02em; cursor:pointer; padding:0;}
+  .cert .cert-actions button:hover{color:var(--accent);}
+  .cert .cert-actions a{font-size:11.5px; color:var(--accent); font-weight:700;}
+
+  /* ---------- Tech Stack (skills) ---------- */
+  .techstack-filters{display:flex; flex-wrap:wrap; gap:10px; margin:28px 0 34px;}
+  .tf-pill{font-size:12.5px; font-weight:600; padding:9px 18px; border-radius:20px; border:1px solid var(--border); background:rgba(255,255,255,.05); color:var(--text-dim); cursor:pointer; transition:all .25s ease; backdrop-filter:var(--glass-blur); -webkit-backdrop-filter:var(--glass-blur);}
+  .tf-pill.active{background:linear-gradient(135deg,#f3e3b8,#e7c37a); color:#22261a; border-color:transparent;}
+  .tf-pill:hover:not(.active){border-color:var(--accent-green); color:var(--text);}
+  .tech-grid{display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:14px;}
+  .tech-tile{background:var(--bg-card); border:1px solid var(--border); border-radius:14px; padding:20px 10px; text-align:center; backdrop-filter:var(--glass-blur); -webkit-backdrop-filter:var(--glass-blur); transition:transform .3s ease, box-shadow .3s ease; box-shadow:inset 0 1px 0 rgba(255,255,255,.07);}
+  .tech-tile:hover{transform:translateY(-4px); box-shadow:0 18px 34px -14px rgba(80,110,60,.5);}
+  .tech-tile.tech-hidden{display:none;}
+  .tech-icon{width:44px; height:44px; border-radius:12px; margin:0 auto 12px; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:800; color:#171c10; letter-spacing:.01em;}
+  .tech-label{font-size:11.5px; color:var(--text-dim); font-weight:500;}
+  .tech-count{margin-top:26px; text-align:center; font-size:12px; color:var(--text-mute); letter-spacing:.03em;}
+  @media(max-width:860px){ .tech-grid{grid-template-columns:repeat(3,minmax(0,1fr));} }
+  @media(max-width:520px){ .tech-grid{grid-template-columns:repeat(2,minmax(0,1fr));} }
+
+  /* ---------- Shared modal system (case studies + credential exhibits) ---------- */
+  .modal-overlay{position:fixed; inset:0; z-index:1000; background:rgba(5,7,4,.78); backdrop-filter:blur(6px); display:flex; align-items:center; justify-content:center; padding:24px; opacity:0; pointer-events:none; transition:opacity .3s ease;}
+  .modal-overlay.active{opacity:1; pointer-events:auto;}
+  .modal-box{background:var(--bg-card); background-color:#12160c; border:1px solid var(--border); border-radius:20px; max-width:660px; width:100%; max-height:85vh; overflow-y:auto; padding:34px; position:relative; box-shadow:0 30px 80px -20px rgba(0,0,0,.75); transform:translateY(20px) scale(.97); transition:transform .35s cubic-bezier(.22,.85,.32,1);}
+  .modal-overlay.active .modal-box{transform:translateY(0) scale(1);}
+  .modal-close{position:absolute; top:20px; right:20px; width:34px; height:34px; border-radius:50%; border:1px solid var(--border); background:rgba(255,255,255,.05); display:flex; align-items:center; justify-content:center; cursor:pointer; color:var(--text-dim); font-size:16px; line-height:1;}
+  .modal-close:hover{color:var(--text); border-color:var(--accent-green);}
+  .modal-eyebrow{font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--text-mute); margin-bottom:16px;}
+  .modal-eyebrow .cat{color:var(--accent);}
+  .modal-head{display:flex; gap:16px; align-items:flex-start; margin-bottom:24px;}
+  .modal-icon{width:52px; height:52px; border-radius:14px; background:rgba(255,255,255,.06); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; font-size:22px; flex:none;}
+  .modal-title{font-family:var(--serif); font-style:italic; font-size:24px; color:var(--text); margin-bottom:4px;}
+  .modal-issuer{color:var(--text-dim); font-size:13px;}
+  .modal-box-inner{background:rgba(255,255,255,.04); border:1px solid var(--border); border-radius:14px; padding:18px 20px; margin-bottom:24px;}
+  .modal-box-inner .lbl{font-family:var(--serif); font-style:italic; font-size:13px; color:var(--text-mute); margin-bottom:8px; text-transform:uppercase; letter-spacing:.04em;}
+  .modal-box-inner p{color:var(--text-dim); font-size:13.5px; line-height:1.65;}
+  .modal-comp-lbl{font-family:var(--serif); font-style:italic; font-size:13px; color:var(--text-mute); text-transform:uppercase; letter-spacing:.04em; margin-bottom:12px;}
+  .modal-comp-tags{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:26px;}
+  .modal-comp-tags span{font-size:12px; background:rgba(255,255,255,.05); border:1px solid var(--border); padding:6px 12px; border-radius:16px; color:var(--text-dim);}
+  .modal-footer{display:flex; align-items:center; justify-content:space-between; border-top:1px solid var(--border); padding-top:18px; flex-wrap:wrap; gap:12px;}
+  .modal-status{font-size:12.5px; color:var(--text-dim);}
+  .case-cards{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin:22px 0;}
+  .case-card{background:rgba(255,255,255,.04); border:1px solid var(--border); border-radius:14px; padding:16px;}
+  .case-card .n{font-family:var(--serif); font-style:italic; font-size:12.5px; color:var(--accent); margin-bottom:8px;}
+  .case-card p{font-size:12.5px; color:var(--text-dim); line-height:1.55;}
+  @media(max-width:640px){ .case-cards{grid-template-columns:1fr;} }
+  .case-milestones{display:flex; flex-direction:column; gap:11px; margin-bottom:24px; padding:0; list-style:none;}
+  .case-milestones li{display:flex; gap:10px; font-size:13.5px; color:var(--text-dim); line-height:1.55;}
+  .case-milestones li::before{content:"✓"; color:var(--accent-green); flex:none; font-weight:700;}
 
   .edu{margin-top:36px; max-width:500px;}
   .edu .deg{font-family:var(--serif); font-style:italic; font-size:22px; color:var(--text);}
@@ -578,6 +635,32 @@
           <div class="chips">
             <span class="chip">LangChain</span><span class="chip">LlamaIndex</span><span class="chip">Vector Search</span><span class="chip">Python</span><span class="chip">FastAPI</span><span class="chip">MLflow</span><span class="chip">RAG Pipelines</span><span class="chip">LLM Evaluation</span>
           </div>
+          <button class="btn btn-outline" style="margin-top:20px;" onclick="openModal('case1')">Launch Case Study</button>
+        </div>
+      </div>
+
+      <div class="modal-overlay" id="case1" onclick="if(event.target===this) closeModal('case1')">
+        <div class="modal-box">
+          <div class="modal-close" onclick="closeModal('case1')">✕</div>
+          <div class="modal-eyebrow">FLAGSHIP &middot; 01 &nbsp;&middot;&nbsp; <span class="cat">Detailed Engineering Case Study</span></div>
+          <div class="modal-title">Enterprise Generative AI knowledge assistant</div>
+          <div class="modal-issuer" style="margin-bottom:22px;">RAG assistant, vector search &amp; LLM evaluation with MLflow</div>
+          <div class="case-cards">
+            <div class="case-card"><div class="n">1. The Challenge</div><p>High query volume and scattered internal documentation slowed enterprise decision-making, with no reliable way to trace answers back to source material.</p></div>
+            <div class="case-card"><div class="n">2. Architecture Solution</div><p>Designed a LangChain &amp; LlamaIndex RAG pipeline with vector search and a Python FastAPI retrieval service, tracked end-to-end with MLflow.</p></div>
+            <div class="case-card"><div class="n">3. System Impact</div><p>Achieved 96.4% retrieval accuracy and sub-second query speed while keeping every LLM experiment traceable and every answer grounded in source context.</p></div>
+          </div>
+          <div class="modal-comp-lbl">Implementation Milestones &amp; System Architecture</div>
+          <ul class="case-milestones">
+            <li>Architected a LangChain &amp; LlamaIndex RAG pipeline with vector search, achieving 96.4% retrieval accuracy across enterprise knowledge sources.</li>
+            <li>Built a Python FastAPI service for semantic chunking, embedding generation, and low-latency retrieval, keeping query response sub-second at scale.</li>
+            <li>Implemented MLflow tracking for prompt versions, retrieval configs, and evaluation runs for full experiment traceability.</li>
+            <li>Grounded every generated answer with source context attribution, reducing hallucination risk for enterprise decision-makers.</li>
+          </ul>
+          <div class="modal-footer">
+            <div class="modal-status">✓ Verified Engineering Deliverable</div>
+            <button class="btn btn-solid" onclick="closeModal('case1')">Close Case Study</button>
+          </div>
         </div>
       </div>
 
@@ -617,6 +700,31 @@
           <div class="chips">
             <span class="chip">PyTorch</span><span class="chip">Hugging Face</span><span class="chip">BERT</span><span class="chip">Named Entity Recognition</span><span class="chip">Embeddings</span><span class="chip">Python</span><span class="chip">Precision-Recall</span>
           </div>
+          <button class="btn btn-outline" style="margin-top:20px;" onclick="openModal('case2')">Launch Case Study</button>
+        </div>
+      </div>
+
+      <div class="modal-overlay" id="case2" onclick="if(event.target===this) closeModal('case2')">
+        <div class="modal-box">
+          <div class="modal-close" onclick="closeModal('case2')">✕</div>
+          <div class="modal-eyebrow">FLAGSHIP &middot; 02 &nbsp;&middot;&nbsp; <span class="cat">Detailed Engineering Case Study</span></div>
+          <div class="modal-title">NLP claim review &amp; member communication intelligence</div>
+          <div class="modal-issuer" style="margin-bottom:22px;">Fine-tuned BERT models, NER &amp; healthcare text analytics</div>
+          <div class="case-cards">
+            <div class="case-card"><div class="n">1. The Challenge</div><p>High volume of unstructured claim notes and member communications required manual review, leading to processing bottlenecks and inconsistent categorization.</p></div>
+            <div class="case-card"><div class="n">2. Architecture Solution</div><p>Fine-tuned BERT transformer models with PyTorch and Hugging Face for automated multi-class classification and Named Entity Recognition.</p></div>
+            <div class="case-card"><div class="n">3. System Impact</div><p>Achieved 94.2% classification accuracy and 40% faster claim review throughput while automating critical entity extraction.</p></div>
+          </div>
+          <div class="modal-comp-lbl">Implementation Milestones &amp; System Architecture</div>
+          <ul class="case-milestones">
+            <li>Fine-tuned BERT models with PyTorch and Hugging Face Transformers to classify claim notes and member-service text into clinical, billing, eligibility, and service-related categories.</li>
+            <li>Extracted entities from unstructured healthcare communication using Named Entity Recognition, embeddings, and Python text preprocessing.</li>
+            <li>Evaluated NLP outputs through precision-recall analysis, classification reports, and segment-level error review, building stronger trust in text classification results.</li>
+          </ul>
+          <div class="modal-footer">
+            <div class="modal-status">✓ Verified Engineering Deliverable</div>
+            <button class="btn btn-solid" onclick="closeModal('case2')">Close Case Study</button>
+          </div>
         </div>
       </div>
     </div>
@@ -626,24 +734,204 @@
 <section id="skills">
   <div class="wrap">
     <div class="eyebrow">Technical skill stack</div>
-    <h2 class="reveal">Tools I build with</h2>
-    <div class="chips" style="margin-top:24px;">
-      <span class="chip">Python</span><span class="chip">SQL</span><span class="chip">R</span><span class="chip">PySpark</span><span class="chip">Pandas &amp; NumPy</span><span class="chip">Scikit-learn</span><span class="chip">XGBoost</span><span class="chip">Predictive Modeling</span><span class="chip">Classification &amp; Regression</span><span class="chip">Propensity &amp; Uplift</span><span class="chip">PyTorch</span><span class="chip">TensorFlow</span><span class="chip">Hugging Face</span><span class="chip">BERT &amp; Transformers</span><span class="chip">NER &amp; Embeddings</span><span class="chip">LangChain</span><span class="chip">LlamaIndex</span><span class="chip">RAG Pipelines</span><span class="chip">Vector Search</span><span class="chip">Prompt Engineering</span><span class="chip">MLflow</span><span class="chip">AWS SageMaker</span><span class="chip">FastAPI</span><span class="chip">Docker</span><span class="chip">Apache Airflow</span><span class="chip">SHAP &amp; LIME</span><span class="chip">Databricks ML</span><span class="chip">SR 11-7 &amp; HIPAA</span><span class="chip">ROC-AUC &amp; PSI</span>
+    <h2 class="reveal">Tech Stack</h2>
+    <p class="lead reveal">Tools I build with.</p>
+
+    <div class="techstack-filters">
+      <button class="tf-pill active" data-cat="all" onclick="techFilter('all',this)">All</button>
+      <button class="tf-pill" data-cat="lang" onclick="techFilter('lang',this)">Languages &amp; Core</button>
+      <button class="tf-pill" data-cat="ml" onclick="techFilter('ml',this)">Machine Learning</button>
+      <button class="tf-pill" data-cat="dl" onclick="techFilter('dl',this)">Deep Learning &amp; NLP</button>
+      <button class="tf-pill" data-cat="genai" onclick="techFilter('genai',this)">Generative AI &amp; LLM</button>
+      <button class="tf-pill" data-cat="mlops" onclick="techFilter('mlops',this)">MLOps &amp; Serving</button>
+      <button class="tf-pill" data-cat="gov" onclick="techFilter('gov',this)">Explainability &amp; Governance</button>
     </div>
+
+    <div class="tech-grid" id="techGrid">
+      <div class="tech-tile" data-cat="lang"><div class="tech-icon" style="background:#e7c37a;">PY</div><div class="tech-label">Python</div></div>
+      <div class="tech-tile" data-cat="lang"><div class="tech-icon" style="background:#e7c37a;">SQL</div><div class="tech-label">SQL</div></div>
+      <div class="tech-tile" data-cat="lang"><div class="tech-icon" style="background:#e7c37a;">R</div><div class="tech-label">R</div></div>
+      <div class="tech-tile" data-cat="lang"><div class="tech-icon" style="background:#e7c37a;">PS</div><div class="tech-label">PySpark</div></div>
+      <div class="tech-tile" data-cat="lang"><div class="tech-icon" style="background:#e7c37a;">PD</div><div class="tech-label">Pandas &amp; NumPy</div></div>
+
+      <div class="tech-tile" data-cat="ml"><div class="tech-icon" style="background:#7fae6f;">SK</div><div class="tech-label">Scikit-learn</div></div>
+      <div class="tech-tile" data-cat="ml"><div class="tech-icon" style="background:#7fae6f;">XGB</div><div class="tech-label">XGBoost</div></div>
+      <div class="tech-tile" data-cat="ml"><div class="tech-icon" style="background:#7fae6f;">ML</div><div class="tech-label">Predictive Modeling</div></div>
+      <div class="tech-tile" data-cat="ml"><div class="tech-icon" style="background:#7fae6f;">CR</div><div class="tech-label">Classification &amp; Reg.</div></div>
+      <div class="tech-tile" data-cat="ml"><div class="tech-icon" style="background:#7fae6f;">UP</div><div class="tech-label">Propensity &amp; Uplift</div></div>
+
+      <div class="tech-tile" data-cat="dl"><div class="tech-icon" style="background:#6fae9e;">PT</div><div class="tech-label">PyTorch</div></div>
+      <div class="tech-tile" data-cat="dl"><div class="tech-icon" style="background:#6fae9e;">TF</div><div class="tech-label">TensorFlow</div></div>
+      <div class="tech-tile" data-cat="dl"><div class="tech-icon" style="background:#6fae9e;">HF</div><div class="tech-label">Hugging Face</div></div>
+      <div class="tech-tile" data-cat="dl"><div class="tech-icon" style="background:#6fae9e; font-size:9.5px;">BERT</div><div class="tech-label">BERT &amp; Transformers</div></div>
+      <div class="tech-tile" data-cat="dl"><div class="tech-icon" style="background:#6fae9e;">NER</div><div class="tech-label">NER &amp; Embeddings</div></div>
+
+      <div class="tech-tile" data-cat="genai"><div class="tech-icon" style="background:#d9a441;">LC</div><div class="tech-label">LangChain</div></div>
+      <div class="tech-tile" data-cat="genai"><div class="tech-icon" style="background:#d9a441;">LI</div><div class="tech-label">LlamaIndex</div></div>
+      <div class="tech-tile" data-cat="genai"><div class="tech-icon" style="background:#d9a441;">RAG</div><div class="tech-label">RAG Pipelines</div></div>
+      <div class="tech-tile" data-cat="genai"><div class="tech-icon" style="background:#d9a441;">VEC</div><div class="tech-label">Vector Search</div></div>
+      <div class="tech-tile" data-cat="genai"><div class="tech-icon" style="background:#d9a441;">PE</div><div class="tech-label">Prompt Engineering</div></div>
+
+      <div class="tech-tile" data-cat="mlops"><div class="tech-icon" style="background:#7f9aae;">MLF</div><div class="tech-label">MLflow</div></div>
+      <div class="tech-tile" data-cat="mlops"><div class="tech-icon" style="background:#7f9aae;">SM</div><div class="tech-label">AWS SageMaker</div></div>
+      <div class="tech-tile" data-cat="mlops"><div class="tech-icon" style="background:#7f9aae;">API</div><div class="tech-label">FastAPI</div></div>
+      <div class="tech-tile" data-cat="mlops"><div class="tech-icon" style="background:#7f9aae;">DKR</div><div class="tech-label">Docker</div></div>
+      <div class="tech-tile" data-cat="mlops"><div class="tech-icon" style="background:#7f9aae;">AF</div><div class="tech-label">Apache Airflow</div></div>
+
+      <div class="tech-tile" data-cat="gov"><div class="tech-icon" style="background:#c98f6a; font-size:9.5px;">SHAP</div><div class="tech-label">SHAP &amp; LIME</div></div>
+      <div class="tech-tile" data-cat="gov"><div class="tech-icon" style="background:#c98f6a;">DB</div><div class="tech-label">Databricks ML</div></div>
+      <div class="tech-tile" data-cat="gov"><div class="tech-icon" style="background:#c98f6a;">GOV</div><div class="tech-label">SR 11-7 &amp; HIPAA</div></div>
+      <div class="tech-tile" data-cat="gov"><div class="tech-icon" style="background:#c98f6a;">AUC</div><div class="tech-label">ROC-AUC &amp; PSI</div></div>
+    </div>
+    <div class="tech-count" id="techCount">Showing 29 of 29 Technologies</div>
   </div>
 </section>
 
 <section id="certifications">
   <div class="wrap">
-    <div class="eyebrow">Credential vault</div>
-    <h2 class="reveal">Verified certifications</h2>
+    <div class="eyebrow">Credential vault &middot; Verified credential museum</div>
+    <h2 class="reveal">The Achievement Museum</h2>
+    <p class="lead reveal">An interactive gallery of verified AI/ML, Generative AI, and MLOps engineering credentials.</p>
     <div class="certs">
-      <div class="cert"><div class="verified">Verified</div><h3>Machine Learning Specialization</h3><div class="issuer">Coursera &middot; DeepLearning.AI / Stanford</div></div>
-      <div class="cert"><div class="verified">Verified</div><h3>AI and LLM Engineering</h3><div class="issuer">Coursera</div></div>
-      <div class="cert"><div class="verified">Verified</div><h3>IBM AI Engineering Professional Certificate</h3><div class="issuer">Coursera &middot; IBM</div></div>
-      <div class="cert"><div class="verified">Verified</div><h3>Deep Learning Specialization</h3><div class="issuer">Coursera &middot; DeepLearning.AI</div></div>
-      <div class="cert"><div class="verified">Verified</div><h3>Generative AI with Large Language Models</h3><div class="issuer">Coursera &middot; DeepLearning.AI &amp; AWS</div></div>
-      <div class="cert"><div class="verified">Verified</div><h3>Machine Learning with Python Professional Certificate</h3><div class="issuer">LinkedIn Learning</div></div>
+
+      <div class="cert">
+        <div class="exhibit-row"><span class="exhibit-num">Exhibit &middot; 01</span><span class="verified-badge">✓ Verified</span></div>
+        <h3>Machine Learning Specialization</h3>
+        <div class="issuer">Coursera &middot; DeepLearning.AI / Stanford</div>
+        <div class="cert-tags"><span>Supervised Learning</span><span>Unsupervised Learning</span><span>XGBoost</span><span>+2</span></div>
+        <div class="cert-actions"><button onclick="openModal('exhibit1')">Inspect Credential</button><a href="#" onclick="openModal('exhibit1'); return false;">View Vault →</a></div>
+      </div>
+
+      <div class="cert">
+        <div class="exhibit-row"><span class="exhibit-num">Exhibit &middot; 02</span><span class="verified-badge">✓ Verified</span></div>
+        <h3>AI and LLM Engineering</h3>
+        <div class="issuer">Coursera</div>
+        <div class="cert-tags"><span>LangChain</span><span>LlamaIndex</span><span>RAG Pipelines</span><span>+3</span></div>
+        <div class="cert-actions"><button onclick="openModal('exhibit2')">Inspect Credential</button><a href="#" onclick="openModal('exhibit2'); return false;">View Vault →</a></div>
+      </div>
+
+      <div class="cert">
+        <div class="exhibit-row"><span class="exhibit-num">Exhibit &middot; 03</span><span class="verified-badge">✓ Verified</span></div>
+        <h3>IBM AI Engineering Professional Certificate</h3>
+        <div class="issuer">Coursera &middot; IBM</div>
+        <div class="cert-tags"><span>PyTorch</span><span>TensorFlow</span><span>Keras</span><span>+3</span></div>
+        <div class="cert-actions"><button onclick="openModal('exhibit3')">Inspect Credential</button><a href="#" onclick="openModal('exhibit3'); return false;">View Vault →</a></div>
+      </div>
+
+      <div class="cert">
+        <div class="exhibit-row"><span class="exhibit-num">Exhibit &middot; 04</span><span class="verified-badge">✓ Verified</span></div>
+        <h3>Deep Learning Specialization</h3>
+        <div class="issuer">Coursera &middot; DeepLearning.AI</div>
+        <div class="cert-tags"><span>Deep Neural Networks</span><span>CNNs</span><span>RNNs &amp; LSTMs</span><span>+3</span></div>
+        <div class="cert-actions"><button onclick="openModal('exhibit4')">Inspect Credential</button><a href="#" onclick="openModal('exhibit4'); return false;">View Vault →</a></div>
+      </div>
+
+      <div class="cert">
+        <div class="exhibit-row"><span class="exhibit-num">Exhibit &middot; 05</span><span class="verified-badge">✓ Verified</span></div>
+        <h3>Generative AI with Large Language Models</h3>
+        <div class="issuer">Coursera &middot; DeepLearning.AI &amp; AWS</div>
+        <div class="cert-tags"><span>Transformer Architecture</span><span>LLM Fine-Tuning</span><span>PEFT &amp; LoRA</span><span>+3</span></div>
+        <div class="cert-actions"><button onclick="openModal('exhibit5')">Inspect Credential</button><a href="#" onclick="openModal('exhibit5'); return false;">View Vault →</a></div>
+      </div>
+
+      <div class="cert">
+        <div class="exhibit-row"><span class="exhibit-num">Exhibit &middot; 06</span><span class="verified-badge">✓ Verified</span></div>
+        <h3>Machine Learning with Python Professional Certificate</h3>
+        <div class="issuer">LinkedIn Learning</div>
+        <div class="cert-tags"><span>Python</span><span>Scikit-learn</span><span>Model Validation</span><span>+3</span></div>
+        <div class="cert-actions"><button onclick="openModal('exhibit6')">Inspect Credential</button><a href="#" onclick="openModal('exhibit6'); return false;">View Vault →</a></div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="exhibit1" onclick="if(event.target===this) closeModal('exhibit1')">
+    <div class="modal-box">
+      <div class="modal-close" onclick="closeModal('exhibit1')">✕</div>
+      <div class="modal-eyebrow">EXHIBIT &middot; 01 &nbsp;&middot;&nbsp; <span class="cat">Machine Learning &amp; Predictive Modeling</span></div>
+      <div class="modal-head">
+        <div class="modal-icon">🧠</div>
+        <div><div class="modal-title">Machine Learning Specialization</div><div class="modal-issuer">Coursera &middot; DeepLearning.AI / Stanford</div></div>
+      </div>
+      <div class="modal-box-inner"><div class="lbl">Credential Verification Summary</div><p>Foundational and advanced specialization covering classification, regression, decision trees, ensemble methods, and neural network optimization.</p></div>
+      <div class="modal-comp-lbl">Verified Engineering Competencies</div>
+      <div class="modal-comp-tags"><span>✓ Supervised Learning</span><span>✓ Unsupervised Learning</span><span>✓ XGBoost</span><span>✓ Neural Networks</span><span>✓ Feature Engineering</span></div>
+      <div class="modal-footer"><div class="modal-status">✓ Credential Status: Verified Active</div><button class="btn btn-solid" onclick="closeModal('exhibit1')">Close Exhibit</button></div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="exhibit2" onclick="if(event.target===this) closeModal('exhibit2')">
+    <div class="modal-box">
+      <div class="modal-close" onclick="closeModal('exhibit2')">✕</div>
+      <div class="modal-eyebrow">EXHIBIT &middot; 02 &nbsp;&middot;&nbsp; <span class="cat">Generative AI &amp; LLM Systems</span></div>
+      <div class="modal-head">
+        <div class="modal-icon">✨</div>
+        <div><div class="modal-title">AI and LLM Engineering</div><div class="modal-issuer">Coursera</div></div>
+      </div>
+      <div class="modal-box-inner"><div class="lbl">Credential Verification Summary</div><p>Specialized credential in engineering Generative AI applications, RAG architectures, semantic vector retrieval, and LLM evaluation frameworks.</p></div>
+      <div class="modal-comp-lbl">Verified Engineering Competencies</div>
+      <div class="modal-comp-tags"><span>✓ LangChain</span><span>✓ LlamaIndex</span><span>✓ RAG Pipelines</span><span>✓ Vector Search</span><span>✓ Prompt Engineering</span><span>✓ LLM Evaluation</span></div>
+      <div class="modal-footer"><div class="modal-status">✓ Credential Status: Verified Active</div><button class="btn btn-solid" onclick="closeModal('exhibit2')">Close Exhibit</button></div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="exhibit3" onclick="if(event.target===this) closeModal('exhibit3')">
+    <div class="modal-box">
+      <div class="modal-close" onclick="closeModal('exhibit3')">✕</div>
+      <div class="modal-eyebrow">EXHIBIT &middot; 03 &nbsp;&middot;&nbsp; <span class="cat">Deep Learning &amp; Cloud AI</span></div>
+      <div class="modal-head">
+        <div class="modal-icon">🗄️</div>
+        <div><div class="modal-title">IBM AI Engineering Professional Certificate</div><div class="modal-issuer">Coursera &middot; IBM</div></div>
+      </div>
+      <div class="modal-box-inner"><div class="lbl">Credential Verification Summary</div><p>Comprehensive professional certificate covering deep learning frameworks, neural network architectures, computer vision, and production model deployment.</p></div>
+      <div class="modal-comp-lbl">Verified Engineering Competencies</div>
+      <div class="modal-comp-tags"><span>✓ PyTorch</span><span>✓ TensorFlow</span><span>✓ Keras</span><span>✓ Deep Learning</span><span>✓ Computer Vision</span><span>✓ Model Deployment</span></div>
+      <div class="modal-footer"><div class="modal-status">✓ Credential Status: Verified Active</div><button class="btn btn-solid" onclick="closeModal('exhibit3')">Close Exhibit</button></div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="exhibit4" onclick="if(event.target===this) closeModal('exhibit4')">
+    <div class="modal-box">
+      <div class="modal-close" onclick="closeModal('exhibit4')">✕</div>
+      <div class="modal-eyebrow">EXHIBIT &middot; 04 &nbsp;&middot;&nbsp; <span class="cat">Deep Learning Architectures</span></div>
+      <div class="modal-head">
+        <div class="modal-icon">🧬</div>
+        <div><div class="modal-title">Deep Learning Specialization</div><div class="modal-issuer">Coursera &middot; DeepLearning.AI</div></div>
+      </div>
+      <div class="modal-box-inner"><div class="lbl">Credential Verification Summary</div><p>Advanced specialization covering deep neural network architectures, convolutional networks, sequence models, and optimization techniques for production-grade deep learning systems.</p></div>
+      <div class="modal-comp-lbl">Verified Engineering Competencies</div>
+      <div class="modal-comp-tags"><span>✓ Deep Neural Networks</span><span>✓ CNNs</span><span>✓ RNNs &amp; LSTMs</span><span>✓ Hyperparameter Tuning</span><span>✓ Regularization</span><span>✓ Optimization</span></div>
+      <div class="modal-footer"><div class="modal-status">✓ Credential Status: Verified Active</div><button class="btn btn-solid" onclick="closeModal('exhibit4')">Close Exhibit</button></div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="exhibit5" onclick="if(event.target===this) closeModal('exhibit5')">
+    <div class="modal-box">
+      <div class="modal-close" onclick="closeModal('exhibit5')">✕</div>
+      <div class="modal-eyebrow">EXHIBIT &middot; 05 &nbsp;&middot;&nbsp; <span class="cat">Generative AI &amp; LLM Systems</span></div>
+      <div class="modal-head">
+        <div class="modal-icon">🪄</div>
+        <div><div class="modal-title">Generative AI with Large Language Models</div><div class="modal-issuer">Coursera &middot; DeepLearning.AI &amp; AWS</div></div>
+      </div>
+      <div class="modal-box-inner"><div class="lbl">Credential Verification Summary</div><p>Specialized training in transformer-based LLM architecture, fine-tuning techniques, parameter-efficient methods, and responsible deployment of generative AI systems.</p></div>
+      <div class="modal-comp-lbl">Verified Engineering Competencies</div>
+      <div class="modal-comp-tags"><span>✓ Transformer Architecture</span><span>✓ LLM Fine-Tuning</span><span>✓ PEFT &amp; LoRA</span><span>✓ RLHF</span><span>✓ Prompt Engineering</span><span>✓ Responsible AI</span></div>
+      <div class="modal-footer"><div class="modal-status">✓ Credential Status: Verified Active</div><button class="btn btn-solid" onclick="closeModal('exhibit5')">Close Exhibit</button></div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="exhibit6" onclick="if(event.target===this) closeModal('exhibit6')">
+    <div class="modal-box">
+      <div class="modal-close" onclick="closeModal('exhibit6')">✕</div>
+      <div class="modal-eyebrow">EXHIBIT &middot; 06 &nbsp;&middot;&nbsp; <span class="cat">Applied Machine Learning</span></div>
+      <div class="modal-head">
+        <div class="modal-icon">🐍</div>
+        <div><div class="modal-title">Machine Learning with Python Professional Certificate</div><div class="modal-issuer">LinkedIn Learning</div></div>
+      </div>
+      <div class="modal-box-inner"><div class="lbl">Credential Verification Summary</div><p>Professional certificate covering end-to-end machine learning workflows with Python, from data preprocessing to model validation and deployment best practices.</p></div>
+      <div class="modal-comp-lbl">Verified Engineering Competencies</div>
+      <div class="modal-comp-tags"><span>✓ Python</span><span>✓ Scikit-learn</span><span>✓ Model Validation</span><span>✓ Data Preprocessing</span><span>✓ Cross-Validation</span><span>✓ Model Evaluation</span></div>
+      <div class="modal-footer"><div class="modal-status">✓ Credential Status: Verified Active</div><button class="btn btn-solid" onclick="closeModal('exhibit6')">Close Exhibit</button></div>
     </div>
   </div>
 </section>
@@ -686,6 +974,42 @@
   function toggleJob(headEl) {
     const job = headEl.closest('.job');
     job.classList.toggle('open');
+  }
+
+  // Shared modal system (case studies + credential exhibits)
+  function openModal(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.modal-overlay.active').forEach(el => {
+        el.classList.remove('active');
+      });
+      document.body.style.overflow = '';
+    }
+  });
+
+  // Tech Stack category filter
+  function techFilter(cat, btn) {
+    document.querySelectorAll('.tf-pill').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    const tiles = document.querySelectorAll('.tech-tile');
+    let shown = 0;
+    tiles.forEach(t => {
+      const match = (cat === 'all' || t.dataset.cat === cat);
+      t.classList.toggle('tech-hidden', !match);
+      if (match) shown++;
+    });
+    document.getElementById('techCount').textContent = 'Showing ' + shown + ' of ' + tiles.length + ' Technologies';
   }
 
   // Scroll-reveal for cards and headings
