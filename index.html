@@ -21,23 +21,37 @@
     --sidebar-bg:rgba(10,13,8,.55); --modal-bg:#12160c; --overlay-bg:rgba(5,7,4,.78);
     --banner-g1:#1a2011; --banner-g2:#0b0e07; --node-bg:rgba(10,13,8,.55);
   }
-  /* "light" toggle state = exact skin of applywizz-vasumekala-33055.vercel.app (neutral black/white/gold) */
+  /* "light" toggle state = a bright, premium glassmorphic theme — frosted panels over a soft pastel mesh */
   body.light{
-    --bg:#08090b; --bg-2:#0b0d0f; --bg-3:#0a0b0d;
-    --bg-card:linear-gradient(160deg, rgba(255,255,255,0.045), rgba(255,255,255,0.02));
-    --text:#ffffff; --text-dim:#c9cdd6; --text-mute:#8a93a0;
-    --accent:#e8c98a; --accent-green:#34d399; --border:rgba(255,255,255,0.12);
-    --glow-gold:rgba(232,201,138,.3); --glow-green:rgba(52,211,153,.28);
-    --surface-1:rgba(255,255,255,0.045); --surface-2:rgba(255,255,255,0.065);
-    --sidebar-bg:rgba(8,9,11,.65); --modal-bg:#0c0d10; --overlay-bg:rgba(3,4,5,.8);
-    --banner-g1:#111214; --banner-g2:#08090a; --node-bg:rgba(8,9,11,.6);
+    --bg:#eef1f7; --bg-2:#e8edf6; --bg-3:#f6f2ea;
+    --bg-card:linear-gradient(160deg, rgba(255,255,255,0.7), rgba(255,255,255,0.32));
+    --text:#1b2233; --text-dim:#4a5266; --text-mute:#7c8496;
+    --accent:#b8791f; --accent-green:#1f9d5c; --border:rgba(25,35,60,0.12);
+    --glow-gold:rgba(184,121,31,.22); --glow-green:rgba(31,157,92,.2);
+    --surface-1:rgba(255,255,255,0.55); --surface-2:rgba(255,255,255,0.75);
+    --sidebar-bg:rgba(255,255,255,0.55); --modal-bg:rgba(255,255,255,0.88); --overlay-bg:rgba(198,205,222,.55);
+    --banner-g1:#ffffff; --banner-g2:#eef1f7; --node-bg:rgba(255,255,255,0.65);
+    --glass-blur:blur(30px) saturate(190%);
   }
   body.light{
     background:
-      repeating-linear-gradient(0deg, rgba(255,255,255,0.025) 0 1px, transparent 1px 64px),
-      repeating-linear-gradient(90deg, rgba(255,255,255,0.025) 0 1px, transparent 1px 64px),
-      linear-gradient(160deg, var(--bg) 0%, var(--bg-2) 35%, var(--bg-3) 70%, var(--bg) 100%);
+      radial-gradient(circle at 10% 8%, rgba(231,195,122,.4), transparent 42%),
+      radial-gradient(circle at 90% 12%, rgba(127,174,111,.32), transparent 45%),
+      radial-gradient(circle at 20% 88%, rgba(150,180,235,.32), transparent 48%),
+      radial-gradient(circle at 85% 82%, rgba(231,195,122,.24), transparent 45%),
+      linear-gradient(160deg, var(--bg) 0%, var(--bg-2) 45%, var(--bg-3) 100%);
+    background-attachment: fixed;
   }
+  body.light .card, body.light .job, body.light .proj, body.light .cert, body.light .edu, body.light .contact-card,
+  body.light .tech-tile, body.light .modal-box, body.light .book-cover,
+  body.light .job-metric, body.light .proj .metric, body.light .ml-stage,
+  body.light .case-card, body.light .mockwin, body.light .stats{
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.9), inset 0 0 60px rgba(255,255,255,.25),
+      0 0 0 1px rgba(255,255,255,.5), 0 20px 45px -20px rgba(60,70,110,.25), 0 8px 30px -12px rgba(184,121,31,.12);
+  }
+  body.light .sidebar{box-shadow:inset -1px 0 0 rgba(255,255,255,.6), 4px 0 30px -10px rgba(60,70,110,.15);}
+  body.light .theme-toggle{box-shadow:inset 0 1px 0 rgba(255,255,255,.8), 0 10px 26px -10px rgba(60,70,110,.3);}
   *{box-sizing:border-box; margin:0; padding:0;}
   html{scroll-behavior:smooth;}
   @keyframes slowFlash{
@@ -185,14 +199,67 @@
   .ml-lifecycle{margin-top:56px; padding-top:40px; border-top:1px solid var(--border);}
   .ml-lifecycle-title{text-align:center; font-size:1.7rem; margin-bottom:6px;}
   .ml-lifecycle-sub{text-align:center; color:var(--text-mute); font-size:.92rem; margin-bottom:36px;}
-  .ml-row{display:flex; align-items:flex-start; justify-content:center; gap:0; flex-wrap:wrap; max-width:1000px; margin:0 auto;}
-  .ml-stage{display:flex; flex-direction:column; align-items:center; text-align:center; width:190px; padding:20px 14px; border-radius:18px; background:var(--bg-card); border:1px solid var(--border); backdrop-filter:var(--glass-blur); -webkit-backdrop-filter:var(--glass-blur);}
-  .ml-icon{width:50px; height:50px; border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:22px; background:var(--surface-2); margin-bottom:12px; border:1px solid var(--border); backdrop-filter:var(--glass-blur); -webkit-backdrop-filter:var(--glass-blur);}
-  .ml-label{font-family:var(--serif); font-style:italic; font-weight:700; font-size:1rem; margin-bottom:6px;}
-  .ml-desc{font-size:.78rem; color:var(--text-mute); line-height:1.4;}
-  .ml-arrow{display:flex; align-items:center; justify-content:center; width:52px; padding-top:36px; color:var(--accent-green);}
-  .ml-arrow svg{width:100%; height:auto;}
-  @media(max-width:900px){ .ml-arrow{width:100%; padding:8px 0; transform:rotate(90deg);} .ml-row{flex-direction:column; align-items:center;} .ml-stage{width:100%; max-width:320px;} }
+
+  /* ---------- 3-layer selector + spec panel (Lalitha-style Analytics Architecture) ---------- */
+  .layer-cards{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; margin-bottom:20px;}
+  .layer-card{background:var(--bg-card); border:1px solid var(--border); border-radius:16px; padding:20px; cursor:pointer;
+    backdrop-filter:var(--glass-blur); -webkit-backdrop-filter:var(--glass-blur); transition:all .3s ease;}
+  .layer-card:hover{transform:translateY(-3px);}
+  .layer-card.active{border-color:var(--accent-green); box-shadow:0 0 0 1px var(--accent-green), 0 20px 40px -20px rgba(127,174,111,.45);}
+  .layer-head{display:flex; gap:12px; align-items:center; margin-bottom:16px;}
+  .layer-icon{width:38px; height:38px; border-radius:50%; border:1px solid var(--border); display:flex; align-items:center; justify-content:center; font-size:16px; color:var(--accent); flex:none;}
+  .layer-num{font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--text-mute);}
+  .layer-name{font-family:var(--serif); font-style:italic; font-weight:700; font-size:17px; color:var(--text);}
+  .layer-tags strong{display:block; font-size:13px; color:var(--text); margin-bottom:4px; font-weight:600;}
+  .layer-tags span{font-size:11px; color:var(--text-mute);}
+  .layer-bar{height:4px; background:var(--surface-2); border-radius:4px; margin:16px 0 10px; overflow:hidden;}
+  .layer-bar-fill{height:100%; width:12%; background:linear-gradient(90deg,#e7c37a,#7fae6f); border-radius:4px; transition:width .4s ease;}
+  .layer-card.active .layer-bar-fill{width:100%;}
+  .layer-status{font-size:10.5px; color:var(--text-mute); text-align:right;}
+  .layer-card.active .layer-status{color:var(--accent-green); font-weight:600;}
+
+  .layer-spec{background:var(--bg-card); border:1px solid var(--border); border-radius:16px; padding:26px;
+    backdrop-filter:var(--glass-blur); -webkit-backdrop-filter:var(--glass-blur); margin-bottom:44px;}
+  .layer-spec-head{display:flex; align-items:center; gap:10px; font-size:14.5px; font-weight:700; color:var(--text); margin-bottom:20px; padding-bottom:16px; border-bottom:1px solid var(--border);}
+  .layer-spec-head .hl{color:var(--accent);}
+  .layer-spec-grid{display:grid; grid-template-columns:1fr 1fr; gap:28px;}
+  .layer-spec-lbl{font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--text-mute); margin-bottom:10px;}
+  .layer-spec-obj{font-size:13.5px; color:var(--text-dim); line-height:1.6; margin-bottom:18px;}
+  .layer-validation{background:var(--surface-1); border:1px solid var(--border); border-radius:10px; padding:12px 14px; font-size:12.5px; color:var(--text-dim); display:flex; align-items:center; gap:8px;}
+  .layer-validation .ok{color:var(--accent-green); font-weight:700;}
+  .layer-activities{list-style:none; padding:0; display:flex; flex-direction:column; gap:10px; font-size:12.5px; color:var(--text-dim);}
+  .layer-activities li::before{content:"•"; color:var(--accent); margin-right:6px;}
+  .layer-spec-footer{display:flex; gap:40px; margin-top:20px; padding-top:16px; border-top:1px solid var(--border); flex-wrap:wrap;}
+  .layer-spec-footer .k{font-size:10.5px; color:var(--text-mute); text-transform:uppercase; letter-spacing:.06em; margin-bottom:6px;}
+  .layer-spec-footer .v{font-size:12.5px; color:var(--accent-green); font-weight:700; background:var(--surface-1); padding:6px 12px; border-radius:8px; display:inline-block;}
+  @media(max-width:860px){ .layer-cards{grid-template-columns:1fr;} .layer-spec-grid{grid-template-columns:1fr;} }
+
+  /* ---------- Interactive dataflow (7-node pipeline) ---------- */
+  .dataflow-title{font-family:var(--serif); font-style:italic; font-weight:700; font-size:18px; color:var(--text); margin-bottom:18px;}
+  .dataflow-card{background:var(--bg-card); border:1px solid var(--border); border-radius:16px; padding:26px; backdrop-filter:var(--glass-blur); -webkit-backdrop-filter:var(--glass-blur);}
+  .dataflow-hint{font-size:11px; color:var(--text-mute); letter-spacing:.03em; margin-bottom:22px; text-transform:uppercase;}
+  .dataflow-row{display:flex; align-items:flex-start; overflow-x:auto; padding-bottom:6px; gap:0;}
+  .dataflow-node{flex:none; width:92px; display:flex; flex-direction:column; align-items:center; gap:8px; cursor:pointer; padding:8px 4px; border-radius:12px; border:1px solid transparent; transition:all .25s ease;}
+  .dataflow-node:hover{background:var(--surface-1);}
+  .dataflow-node.active{border-color:var(--accent); background:var(--surface-1);}
+  .dataflow-node-icon{width:46px; height:46px; border-radius:12px; background:var(--surface-2); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; font-size:18px; position:relative;}
+  .dataflow-node.active .dataflow-node-icon{border-color:var(--accent);}
+  .dataflow-node-icon .dot{position:absolute; bottom:-3px; right:-3px; width:8px; height:8px; border-radius:50%; background:var(--accent-green); border:2px solid var(--modal-bg);}
+  .dataflow-node-lbl{font-size:9px; letter-spacing:.02em; text-transform:uppercase; color:var(--text-mute); text-align:center; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:92px;}
+  .dataflow-node.active .dataflow-node-lbl{color:var(--text); font-weight:700;}
+  .dataflow-connector{flex:none; width:26px; height:1px; background:var(--border); margin-top:31px;}
+  .dataflow-progress{height:3px; background:var(--surface-2); border-radius:3px; margin:22px 0 24px; overflow:hidden;}
+  .dataflow-progress-fill{height:100%; background:linear-gradient(90deg,#e7c37a,#7fae6f); border-radius:3px; transition:width .4s ease;}
+  .node-detail{background:var(--surface-1); border:1px solid var(--border); border-radius:12px; padding:20px;}
+  .node-detail-top{display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; flex-wrap:wrap; gap:10px; padding-bottom:14px; border-bottom:1px solid var(--border);}
+  .node-detail-status{font-size:12px; color:var(--text-dim);}
+  .node-detail-status .dot{color:var(--accent-green);}
+  .node-detail-badge{font-size:11px; font-weight:700; background:var(--surface-2); border:1px solid var(--border); padding:5px 12px; border-radius:14px; color:var(--accent);}
+  .node-detail-grid{display:grid; grid-template-columns:1fr 1fr 1.5fr; gap:20px;}
+  .node-detail-grid .k{font-size:10px; letter-spacing:.08em; text-transform:uppercase; color:var(--text-mute); margin-bottom:6px;}
+  .node-detail-grid .v{font-size:13px; font-weight:700; color:var(--text);}
+  .node-detail-grid .desc{font-size:12.5px; color:var(--text-dim); line-height:1.55;}
+  @media(max-width:700px){ .node-detail-grid{grid-template-columns:1fr;} }
 
   .timeline{display:flex; flex-direction:column; gap:20px; margin-top:36px;}
   .chips{display:flex; flex-wrap:wrap; gap:8px;}
@@ -556,31 +623,17 @@
 
     <div class="ml-lifecycle">
       <div class="ml-lifecycle-title">End-to-End ML Lifecycle</div>
-      <div class="ml-lifecycle-sub">How I take a model from raw data to a monitored production system</div>
-      <div class="ml-row">
-        <div class="ml-stage card">
-          <div class="ml-icon">🗄️</div>
-          <div class="ml-label">Data</div>
-          <div class="ml-desc">Ingest &amp; curate claims, logs, and records from SQL/PySpark pipelines</div>
-        </div>
-        <div class="ml-arrow"><svg viewBox="0 0 56 20" preserveAspectRatio="none"><path d="M0 10 H46" stroke="currentColor" stroke-width="2" stroke-dasharray="5 5"/><path d="M40 4 L50 10 L40 16" fill="none" stroke="currentColor" stroke-width="2"/></svg></div>
-        <div class="ml-stage card">
-          <div class="ml-icon">🧠</div>
-          <div class="ml-label">Train</div>
-          <div class="ml-desc">Build &amp; validate models with PyTorch, XGBoost, and Scikit-learn</div>
-        </div>
-        <div class="ml-arrow"><svg viewBox="0 0 56 20" preserveAspectRatio="none"><path d="M0 10 H46" stroke="currentColor" stroke-width="2" stroke-dasharray="5 5"/><path d="M40 4 L50 10 L40 16" fill="none" stroke="currentColor" stroke-width="2"/></svg></div>
-        <div class="ml-stage card">
-          <div class="ml-icon">🚀</div>
-          <div class="ml-label">Deploy</div>
-          <div class="ml-desc">Ship via FastAPI, Docker &amp; SageMaker with CI/CD pipelines</div>
-        </div>
-        <div class="ml-arrow"><svg viewBox="0 0 56 20" preserveAspectRatio="none"><path d="M0 10 H46" stroke="currentColor" stroke-width="2" stroke-dasharray="5 5"/><path d="M40 4 L50 10 L40 16" fill="none" stroke="currentColor" stroke-width="2"/></svg></div>
-        <div class="ml-stage card">
-          <div class="ml-icon">📊</div>
-          <div class="ml-label">Monitor</div>
-          <div class="ml-desc">Track drift, SHAP explainability &amp; performance with MLflow</div>
-        </div>
+      <div class="ml-lifecycle-sub">The end-to-end intelligent engineering pipeline, from ingestion to deployment</div>
+
+      <div class="layer-cards" id="layerCards"></div>
+      <div class="layer-spec" id="layerSpec"></div>
+
+      <div class="dataflow-title">&#8801; End-to-End Analytics Pipeline</div>
+      <div class="dataflow-card">
+        <div class="dataflow-hint">Interactive dataflow &middot; click nodes to inspect live configurations</div>
+        <div class="dataflow-row" id="dataflowRow"></div>
+        <div class="dataflow-progress"><div class="dataflow-progress-fill" id="dataflowProgressFill"></div></div>
+        <div class="node-detail" id="nodeDetail"></div>
       </div>
     </div>
   </div>
@@ -1288,6 +1341,110 @@
   function nextSlide(id) { showSlide(id, (slideState[id] || 0) + 1); }
   function prevSlide(id) { showSlide(id, (slideState[id] || 0) - 1); }
   function goToSlide(id, idx) { showSlide(id, idx); }
+
+  // End-to-End ML Lifecycle — 3-layer selector + spec panel, and a 7-node interactive dataflow
+  const mlLayers = [
+    { icon:'◎', tag:"Layer · 01", name:'Data Engineering', title:'Data Engineering &amp; Spark Pipelines', sub:'ETL &middot; PySpark &middot; SQL &middot; Feature Engineering',
+      objective:'Extracting, cleansing, and preparing high-quality features from complex banking, telecom, and healthcare data sources.',
+      validation:'Comprehensive data cleansing and data quality validation',
+      activities:['Building PySpark and SQL pipelines to process credit, billing, and claims datasets','Engineering high-quality features from healthcare, banking, and telecom records via preprocessing','Integrating multi-source banking, network, and pharmacy records into centralized analytics tables'],
+      output:'Clean, Scalable Data Pipelines', tooling:'Apache Spark / PySpark' },
+    { icon:'◈', tag:"Layer · 02", name:'AI/ML Modeling', title:'Machine Learning &amp; Generative AI', sub:'PyTorch &middot; Scikit-learn &middot; RAG &middot; LangChain',
+      objective:'Training predictive models and orchestrating Retrieval-Augmented Generation workflows for intelligent search and forecasting.',
+      validation:'Validation loops, ROC-AUC scoring, and cross-validation datasets',
+      activities:['Developing Generative AI assistants using LangChain, LlamaIndex, and vector search frameworks','Training deep learning and gradient-boosted models with PyTorch and XGBoost for fraud and risk detection','Integrating vector databases and embeddings for enterprise semantic search workflows'],
+      output:'Predictive Models &amp; LLM Agents', tooling:'PyTorch / Scikit-learn' },
+    { icon:'⬡', tag:"Layer · 03", name:'MLOps &amp; Deploy', title:'MLOps, Monitoring &amp; Deployment', sub:'MLflow &middot; SageMaker &middot; Docker &middot; Airflow',
+      objective:'Establishing robust CI/CD, deployment governance, and drift monitoring for enterprise AI solutions.',
+      validation:'Continuous monitoring, drift detection, and regression validation',
+      activities:['Configuring AWS SageMaker Pipelines and MLflow Model Registry for production workflows','Automating retraining triggers and CI/CD with Docker, Apache Airflow, and FastAPI handoffs','Applying SHAP and LIME explainability with monitoring dashboards for Responsible AI compliance'],
+      output:'Productionized AI Solutions', tooling:'MLflow / SageMaker' }
+  ];
+  const mlNodes = [
+    { icon:'🗄️', label:'Enterprise Datasets', platform:'SQL / PySpark / Data Integration', badge:'Ingestion: Scalable', component:'Raw Datasets', role:'Data Sources', desc:'Banking, telecom, and healthcare insurance records extracted for ML analytics.' },
+    { icon:'🔄', label:'PySpark Pipelines', platform:'Apache Spark / PySpark', badge:'Speed: 35% Time Saved', component:'ETL Processing', role:'Feature Engineering', desc:'Cleansing, preprocessing, and transforming raw records into high-quality statistical features.' },
+    { icon:'🧠', label:'PyTorch / XGBoost', platform:'PyTorch / XGBoost / Scikit-learn', badge:'Accuracy: +16% Gain', component:'Model Development', role:'Model Training', desc:'Training neural networks and gradient-boosted classifiers for credit risk, fraud, and churn prediction.' },
+    { icon:'🔎', label:'Vector Search', platform:'FAISS / Vector Search', badge:'Retrieval: 96.4% Accuracy', component:'Knowledge Retrieval', role:'Vector Database', desc:'Indexing enterprise documentation into vector spaces using embeddings for semantic similarity search.' },
+    { icon:'💬', label:'LangChain RAG', platform:'LangChain / LlamaIndex', badge:'Latency: Sub-sec', component:'RAG Orchestration', role:'Generative AI', desc:'Structuring RAG pipelines, prompt engineering, and grounded context retrieval for enterprise answers.' },
+    { icon:'✅', label:'MLflow / SageMaker', platform:'MLflow / SageMaker / Docker', badge:'Monitoring: 6 Workflows', component:'MLOps Governance', role:'Model Deployment', desc:'Tracking experiments, containerizing models, and deploying through automated CI/CD pipelines.' },
+    { icon:'📊', label:'SHAP &amp; Dashboards', platform:'SHAP / LIME / FastAPI', badge:'Compliance: HIPAA / SR 11-7', component:'Explainability &amp; Delivery', role:'Production Run', desc:'Exposing inference endpoints via FastAPI and surfacing SHAP-based reason codes for governance review.' }
+  ];
+  let activeLayer = 0;
+  let activeNode = 0;
+
+  function renderLayerCards() {
+    const wrap = document.getElementById('layerCards');
+    if (!wrap) return;
+    wrap.innerHTML = mlLayers.map((l, i) => `
+      <div class="layer-card${i === activeLayer ? ' active' : ''}" onclick="selectLayer(${i})">
+        <div class="layer-head"><div class="layer-icon">${l.icon}</div><div><div class="layer-num">${l.tag}</div><div class="layer-name">${l.name}</div></div></div>
+        <div class="layer-tags"><strong>${l.title}</strong><span>${l.sub}</span></div>
+        <div class="layer-bar"><div class="layer-bar-fill"></div></div>
+        <div class="layer-status">${i === activeLayer ? '&#9679; Active View' : '&#9675; Click to expand details'}</div>
+      </div>
+    `).join('');
+  }
+  function renderLayerSpec() {
+    const el = document.getElementById('layerSpec');
+    if (!el) return;
+    const l = mlLayers[activeLayer];
+    el.innerHTML = `
+      <div class="layer-spec-head">&#8505; Layer Specifications: <span class="hl">${l.name} (${l.title})</span></div>
+      <div class="layer-spec-grid">
+        <div>
+          <div class="layer-spec-lbl">Core Objective &amp; Role</div>
+          <div class="layer-spec-obj">${l.objective}</div>
+          <div class="layer-spec-lbl">Process Validation Method</div>
+          <div class="layer-validation"><span class="ok">&#10003;</span> ${l.validation}</div>
+        </div>
+        <div>
+          <div class="layer-spec-lbl">Key Operational Activities</div>
+          <ul class="layer-activities">${l.activities.map(a => `<li>${a}</li>`).join('')}</ul>
+        </div>
+      </div>
+      <div class="layer-spec-footer">
+        <div><div class="k">Target Output</div><span class="v">${l.output}</span></div>
+        <div><div class="k">Primary Tooling</div><span class="v">${l.tooling}</span></div>
+      </div>
+    `;
+  }
+  function selectLayer(i) { activeLayer = i; renderLayerCards(); renderLayerSpec(); }
+
+  function renderDataflowRow() {
+    const wrap = document.getElementById('dataflowRow');
+    if (!wrap) return;
+    wrap.innerHTML = mlNodes.map((n, i) => `
+      ${i > 0 ? '<div class="dataflow-connector"></div>' : ''}
+      <div class="dataflow-node${i === activeNode ? ' active' : ''}" onclick="selectNode(${i})">
+        <div class="dataflow-node-icon">${n.icon}<span class="dot"></span></div>
+        <div class="dataflow-node-lbl">${n.label}</div>
+      </div>
+    `).join('');
+  }
+  function renderNodeDetail() {
+    const fill = document.getElementById('dataflowProgressFill');
+    const el = document.getElementById('nodeDetail');
+    if (!fill || !el) return;
+    const n = mlNodes[activeNode];
+    fill.style.width = ((activeNode + 1) / mlNodes.length * 100) + '%';
+    el.innerHTML = `
+      <div class="node-detail-top">
+        <div class="node-detail-status"><span class="dot">&#9679;</span> Node Status: Active &middot; Platform: ${n.platform}</div>
+        <div class="node-detail-badge">${n.badge}</div>
+      </div>
+      <div class="node-detail-grid">
+        <div><div class="k">Component</div><div class="v">${n.component}</div></div>
+        <div><div class="k">Topology Role</div><div class="v">${n.role}</div></div>
+        <div><div class="k">Description</div><div class="desc">${n.desc}</div></div>
+      </div>
+    `;
+  }
+  function selectNode(i) { activeNode = i; renderDataflowRow(); renderNodeDetail(); }
+
+  renderLayerCards();
+  renderLayerSpec();
+  renderDataflowRow();
+  renderNodeDetail();
 
   // Tech Stack category filter — a real curtain panel drops top-to-bottom over the
   // grid; skill tiles fade into place timed to the exact moment the curtain passes them.
