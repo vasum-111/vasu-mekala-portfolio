@@ -393,10 +393,61 @@
   .proj-cta-note{font-size:11.5px; color:var(--text-mute); margin-top:10px;}
   .proj-slides-btn{display:inline-flex; align-items:center; gap:8px;}
 
-  .edu{margin-top:36px; max-width:500px;}
-  .edu .deg{font-family:var(--serif); font-style:italic; font-size:22px; color:var(--text);}
-  .edu .school{color:var(--text-dim); font-size:14px; margin-top:6px;}
-  .edu .when{color:var(--text-mute); font-size:12px; margin-top:6px;}
+  /* ---------- Interactive academic bookshelf (3D animated degree card) ---------- */
+  .book-stage{margin-top:56px; display:flex; flex-direction:column; align-items:center; perspective:1400px;}
+  @keyframes bookFloat{0%,100%{transform:translateY(0);} 50%{transform:translateY(-10px);}}
+  .book-float{animation:bookFloat 5s ease-in-out infinite;}
+  .book-3d{
+    width:280px; height:360px; position:relative; cursor:pointer;
+    transform:rotateY(-20deg) rotateX(5deg); transform-style:preserve-3d;
+    transition:transform .5s cubic-bezier(.22,.85,.32,1);
+  }
+  .book-3d:hover, .book-3d:focus-visible{transform:rotateY(-5deg) rotateX(1deg) scale(1.05);}
+  .book-cover{
+    position:absolute; inset:0; border-radius:8px 14px 14px 8px;
+    background:var(--bg-card); background-color:var(--modal-bg); border:1px solid var(--border);
+    padding:26px 24px; display:flex; flex-direction:column; justify-content:space-between;
+    backdrop-filter:var(--glass-blur); -webkit-backdrop-filter:var(--glass-blur);
+    box-shadow:
+      6px 0 0 -1px var(--surface-1), 10px 0 0 -2px var(--surface-2), 14px 0 0 -3px var(--surface-1),
+      -18px 24px 46px -16px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.08);
+  }
+  .book-top-row{display:flex; justify-content:space-between; align-items:flex-start; font-size:19px;}
+  .book-cap-icon{width:42px; height:42px; border-radius:50%; background:var(--surface-2); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; font-size:18px;}
+  .book-mid{text-align:left;}
+  .book-kicker{font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--text-mute); margin-bottom:10px;}
+  .book-title{font-family:var(--serif); font-style:italic; font-weight:700; font-size:24px; color:var(--text); line-height:1.2; margin-bottom:14px;}
+  .book-rule{width:44px; height:2px; background:linear-gradient(90deg,#e7c37a,#7fae6f); margin-bottom:12px; border-radius:2px;}
+  .book-school{font-family:var(--serif); font-style:italic; color:var(--text-dim); font-size:14px;}
+  .book-bottom-row{display:flex; justify-content:space-between; font-size:11px; color:var(--text-mute); border-top:1px solid var(--border); padding-top:14px;}
+  .book-shelf{width:340px; max-width:82%; height:14px; margin-top:34px; border-radius:8px; background:linear-gradient(180deg, var(--surface-2), var(--surface-1)); border:1px solid var(--border); box-shadow:0 24px 44px -18px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.08);}
+  .book-hint{margin-top:14px; font-size:11px; color:var(--text-mute); letter-spacing:.03em; opacity:0; transition:opacity .3s ease;}
+  .book-stage:hover .book-hint{opacity:1;}
+
+  /* open-book two-page modal spread */
+  .book-open-box{max-width:820px; padding:0; overflow:visible; border-radius:20px;}
+  .book-open-box .modal-close{top:-14px; right:-14px; z-index:2;}
+  .book-pages{display:grid; grid-template-columns:1fr 1fr; max-height:78vh; overflow-y:auto; border-radius:20px 20px 0 0;}
+  .book-page{padding:34px 30px;}
+  .book-page.left{border-right:1px solid var(--border);}
+  .book-degree-tag{display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:700; background:var(--surface-1); border:1px solid var(--border); padding:5px 12px; border-radius:14px; color:var(--text-dim); margin-bottom:18px;}
+  .book-open-title{font-family:var(--serif); font-style:italic; font-size:22px; color:var(--text); line-height:1.3; margin-bottom:8px;}
+  .book-open-school{font-family:var(--serif); font-style:italic; color:var(--text-dim); font-size:14px; margin-bottom:20px;}
+  .book-meta-row{font-size:12.5px; color:var(--text-dim); margin-bottom:9px;}
+  .book-meta-row strong{color:var(--text);}
+  .book-verified-card{display:flex; gap:12px; align-items:center; background:var(--surface-1); border:1px solid var(--border); border-radius:12px; padding:14px; margin-top:26px;}
+  .book-verified-icon{width:38px; height:38px; border-radius:10px; background:var(--surface-2); display:flex; align-items:center; justify-content:center; font-size:17px; flex:none;}
+  .book-verified-title{font-size:12.5px; font-weight:700; color:var(--text);}
+  .book-verified-sub{font-size:11px; color:var(--text-mute);}
+  .book-section-lbl{font-family:var(--serif); font-style:italic; font-size:13px; color:var(--accent); letter-spacing:.03em; margin:20px 0 12px;}
+  .book-page.right .book-section-lbl:first-child{margin-top:0;}
+  .book-spec-tags{display:flex; flex-direction:column; gap:8px;}
+  .book-spec-tags span{font-size:12px; background:var(--surface-1); border:1px solid var(--border); padding:9px 13px; border-radius:10px; color:var(--text-dim);}
+  .book-open-box .modal-footer{padding:18px 30px; margin:0; border-radius:0 0 20px 20px;}
+  @media(max-width:700px){
+    .book-pages{grid-template-columns:1fr; max-height:70vh;}
+    .book-page.left{border-right:none; border-bottom:1px solid var(--border);}
+  }
 
   .contact-grid{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:16px; margin-top:36px;}
   .contact-card .lbl{font-size:11px; color:var(--text-mute); text-transform:uppercase; letter-spacing:.06em; margin-bottom:8px;}
@@ -1081,11 +1132,67 @@
 <section id="education">
   <div class="wrap">
     <div class="eyebrow">Academic foundation</div>
-    <h2 class="reveal">Education</h2>
-    <div class="edu card">
-      <div class="deg">M.S. Data Science</div>
-      <div class="school">University of New Haven</div>
-      <div class="when">Dec 2024</div>
+    <h2 class="reveal">Interactive academic bookshelf</h2>
+    <p class="lead reveal">Hover to inspect the 3D volume, or click to open the full degree record.</p>
+
+    <div class="book-stage">
+      <div class="book-float">
+        <div class="book-3d" onclick="openModal('bookModal')" onkeydown="if(event.key==='Enter'){openModal('bookModal')}" role="button" tabindex="0" aria-label="Open degree record">
+          <div class="book-cover">
+            <div class="book-top-row">
+              <div class="book-cap-icon">🎓</div>
+              <div class="book-bookmark">🔖</div>
+            </div>
+            <div class="book-mid">
+              <div class="book-kicker">Master's Degree</div>
+              <div class="book-title">M.S. Data<br>Science</div>
+              <div class="book-rule"></div>
+              <div class="book-school">University of New Haven</div>
+            </div>
+            <div class="book-bottom-row"><span>Dec 2024</span><span>Open Book →</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="book-shelf"></div>
+      <div class="book-hint">Click to open book</div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="bookModal" onclick="if(event.target===this) closeModal('bookModal')">
+    <div class="modal-box book-open-box">
+      <div class="modal-close" onclick="closeModal('bookModal')">✕</div>
+      <div class="book-pages">
+        <div class="book-page left">
+          <div class="book-degree-tag">🎓 Master's Degree</div>
+          <h3 class="book-open-title">Master of Science in Data Science</h3>
+          <div class="book-open-school">University of New Haven</div>
+          <div class="book-meta-row">📍 Campus Location: <strong>West Haven, Connecticut</strong></div>
+          <div class="book-meta-row">📅 Duration: <strong>Dec 2024</strong></div>
+          <div class="book-verified-card">
+            <div class="book-verified-icon">🏅</div>
+            <div><div class="book-verified-title">Verified Academic Record</div><div class="book-verified-sub">Official degree certification</div></div>
+          </div>
+        </div>
+        <div class="book-page right">
+          <div class="book-section-lbl">✦ Core academic specializations</div>
+          <div class="book-spec-tags">
+            <span>Data Science &amp; Machine Learning</span>
+            <span>Deep Learning &amp; NLP Architecture</span>
+            <span>Statistical Inference &amp; Predictive Modeling</span>
+            <span>Big Data Analytics &amp; MLOps Infrastructure</span>
+          </div>
+          <div class="book-section-lbl">📖 Academic accomplishments &amp; highlights</div>
+          <ul class="case-milestones">
+            <li>Specialized in data science, predictive machine learning, deep learning, and advanced statistical analytics.</li>
+            <li>Completed master's-level coursework in machine learning, data mining, big data analytics, and artificial intelligence.</li>
+            <li>Developed expertise bridging advanced AI/ML algorithms with scalable enterprise production systems.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="modal-status">Degree Record</div>
+        <button class="btn btn-solid" onclick="closeModal('bookModal')">Close &amp; Return to Shelf</button>
+      </div>
     </div>
   </div>
 </section>
