@@ -11,12 +11,12 @@
 <style>
   :root{
     --bg:#0a0d08; --bg-2:#10140b; --bg-3:#14170f;
-    --bg-card:linear-gradient(160deg, rgba(30,37,22,0.9), rgba(15,19,11,0.94));
+    --bg-card:linear-gradient(160deg, rgba(38,46,28,0.42), rgba(14,18,10,0.5));
     --text:#f2f1e6; --text-dim:#b7bba8; --text-mute:#8f9382;
-    --accent:#e7c37a; --accent-green:#7fae6f; --border:rgba(127,174,111,0.28);
+    --accent:#e7c37a; --accent-green:#7fae6f; --border:rgba(178,204,166,0.22);
     --glow-gold:rgba(231,195,122,.35); --glow-green:rgba(127,174,111,.32);
     --serif:'Playfair Display', serif; --sans:'Inter', sans-serif;
-    --maxw:1100px; --sidebar-w:258px;
+    --maxw:1100px; --sidebar-w:258px; --glass-blur:blur(20px) saturate(170%);
   }
   *{box-sizing:border-box; margin:0; padding:0;}
   html{scroll-behavior:smooth;}
@@ -76,8 +76,9 @@
   /* ---------- Left sidebar navigation ---------- */
   .sidebar{
     position:fixed; top:0; left:0; bottom:0; width:var(--sidebar-w); z-index:100;
-    background:rgba(10,13,8,.92); backdrop-filter:blur(14px) saturate(140%);
+    background:rgba(10,13,8,.55); backdrop-filter:var(--glass-blur); -webkit-backdrop-filter:var(--glass-blur);
     border-right:1px solid var(--border);
+    box-shadow:inset -1px 0 0 rgba(255,255,255,.04);
     display:flex; flex-direction:column; padding:34px 22px 24px;
     overflow-y:auto;
   }
@@ -108,7 +109,7 @@
   .btn{font-size:13px; font-weight:600; padding:9px 16px; border-radius:24px; border:1px solid var(--border); white-space:nowrap; transition:transform .3s ease, box-shadow .3s ease; display:inline-block;}
   .btn-solid{background:linear-gradient(135deg,#f3e3b8,#e7c37a); color:#22261a; animation:btnGlow 4s ease-in-out infinite; border:none;}
   .btn-solid:hover{transform:translateY(-2px);}
-  .btn-outline{color:var(--text); background:rgba(255,255,255,0.04);}
+  .btn-outline{color:var(--text); background:rgba(255,255,255,0.06); backdrop-filter:var(--glass-blur); -webkit-backdrop-filter:var(--glass-blur); box-shadow:inset 0 1px 0 rgba(255,255,255,.08);}
   .btn-outline:hover{border-color:var(--accent-green); transform:translateY(-2px);}
 
   .hero{position:relative; padding:72px 0 64px; text-align:center; overflow:hidden;}
@@ -116,7 +117,7 @@
   .orb1{width:420px; height:420px; background:radial-gradient(circle,#e7c37a,transparent 70%); top:-100px; left:-100px; animation:orbFloat1 14s ease-in-out infinite;}
   .orb2{width:480px; height:480px; background:radial-gradient(circle,#7fae6f,transparent 70%); top:20px; right:-140px; animation:orbFloat2 18s ease-in-out infinite;}
   .hero .wrap{position:relative; z-index:1;}
-  .badge{display:inline-flex; align-items:center; gap:8px; border:1px solid var(--border); border-radius:24px; padding:6px 16px; font-size:12px; letter-spacing:.04em; color:var(--text-dim); margin-bottom:24px; animation:wireBend 4s ease-in-out infinite; transform-origin:center center;}
+  .badge{display:inline-flex; align-items:center; gap:8px; border:1px solid var(--border); border-radius:24px; padding:6px 16px; font-size:12px; letter-spacing:.04em; color:var(--text-dim); margin-bottom:24px; animation:wireBend 4s ease-in-out infinite; transform-origin:center center; background:rgba(255,255,255,0.05); backdrop-filter:var(--glass-blur); -webkit-backdrop-filter:var(--glass-blur); box-shadow:inset 0 1px 0 rgba(255,255,255,.07);}
   .badge .dot{width:7px; height:7px; border-radius:50%; background:var(--accent-green); animation:dotPulse 2.4s ease-in-out infinite;}
   .hero h1{font-size:46px; max-width:820px; margin:0 auto 18px; color:var(--text);}
   .hero .role{font-size:13px; letter-spacing:.14em; text-transform:uppercase; color:var(--text-mute); margin-bottom:20px; display:inline-block; white-space:nowrap; animation:oneWayDrift 5s linear infinite;}
@@ -124,7 +125,7 @@
   .hero .actions{display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-bottom:44px;}
   .headline-underline{width:120px; height:4px; margin:6px auto 34px; border-radius:4px; background:linear-gradient(90deg,#e7c37a,#7fae6f,#e7c37a); background-size:200% 100%; animation:underlineShimmer 3s linear infinite;}
 
-  .stats{display:flex; justify-content:center; gap:0; max-width:760px; margin:0 auto; flex-wrap:wrap;}
+  .stats{display:flex; justify-content:center; gap:0; max-width:760px; margin:0 auto; flex-wrap:wrap; background:rgba(255,255,255,0.035); border:1px solid var(--border); border-radius:20px; backdrop-filter:var(--glass-blur); -webkit-backdrop-filter:var(--glass-blur); box-shadow:inset 0 1px 0 rgba(255,255,255,.06); padding:6px 0;}
   .stat{padding:10px 28px; border-left:1px solid var(--border);}
   .stat:first-child{border-left:none;}
   .stat .num{font-size:26px; font-weight:700; color:var(--text); font-family:var(--serif); font-style:italic;}
@@ -132,7 +133,8 @@
 
   .grid-4{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px;}
   .card,.job,.proj,.cert,.edu,.contact-card{background:var(--bg-card); border:1px solid var(--border); border-radius:14px; padding:22px;
-    box-shadow:0 0 0 1px rgba(127,174,111,0.1), 0 20px 45px -20px rgba(0,0,0,.6), 0 0 40px -16px rgba(127,174,111,0.22);
+    backdrop-filter:var(--glass-blur); -webkit-backdrop-filter:var(--glass-blur);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.08), inset 0 0 60px rgba(255,255,255,.015), 0 0 0 1px rgba(127,174,111,0.1), 0 20px 45px -20px rgba(0,0,0,.6), 0 0 40px -16px rgba(127,174,111,0.22);
     transition:transform .35s cubic-bezier(.22,.85,.32,1), box-shadow .35s ease;
     opacity:0; transform:translateY(28px); }
   .card.in-view,.job.in-view,.proj.in-view,.cert.in-view,.edu.in-view,.contact-card.in-view{opacity:1; transform:translateY(0);}
@@ -145,7 +147,7 @@
 
   .skillbars{margin-top:36px; display:flex; flex-direction:column; gap:18px; max-width:640px;}
   .skillbar-row{display:flex; justify-content:space-between; font-size:13px; color:var(--text-dim); margin-bottom:6px;}
-  .skillbar-track{background:rgba(255,255,255,0.06); border-radius:8px; height:8px; overflow:hidden;}
+  .skillbar-track{background:rgba(255,255,255,0.07); border:1px solid var(--border); border-radius:8px; height:8px; overflow:hidden; backdrop-filter:var(--glass-blur); -webkit-backdrop-filter:var(--glass-blur);}
   .skillbar-fill{background:linear-gradient(90deg,#cbdeaf,#e7c37a,#f3e3b8); height:100%; border-radius:8px; width:0; transition:width 1.4s cubic-bezier(.22,.85,.32,1);}
 
   /* ML lifecycle diagram */
@@ -153,8 +155,8 @@
   .ml-lifecycle-title{text-align:center; font-size:1.7rem; margin-bottom:6px;}
   .ml-lifecycle-sub{text-align:center; color:var(--text-mute); font-size:.92rem; margin-bottom:36px;}
   .ml-row{display:flex; align-items:flex-start; justify-content:center; gap:0; flex-wrap:wrap; max-width:1000px; margin:0 auto;}
-  .ml-stage{display:flex; flex-direction:column; align-items:center; text-align:center; width:190px; padding:20px 14px; border-radius:18px; background:var(--bg-card); border:1px solid var(--border);}
-  .ml-icon{width:50px; height:50px; border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:22px; background:rgba(255,255,255,.06); margin-bottom:12px; border:1px solid var(--border);}
+  .ml-stage{display:flex; flex-direction:column; align-items:center; text-align:center; width:190px; padding:20px 14px; border-radius:18px; background:var(--bg-card); border:1px solid var(--border); backdrop-filter:var(--glass-blur); -webkit-backdrop-filter:var(--glass-blur);}
+  .ml-icon{width:50px; height:50px; border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:22px; background:rgba(255,255,255,.08); margin-bottom:12px; border:1px solid var(--border); backdrop-filter:var(--glass-blur); -webkit-backdrop-filter:var(--glass-blur);}
   .ml-label{font-family:var(--serif); font-style:italic; font-weight:700; font-size:1rem; margin-bottom:6px;}
   .ml-desc{font-size:.78rem; color:var(--text-mute); line-height:1.4;}
   .ml-arrow{display:flex; align-items:center; justify-content:center; width:52px; padding-top:36px; color:var(--accent-green);}
@@ -163,11 +165,12 @@
 
   .timeline{display:flex; flex-direction:column; gap:20px; margin-top:36px;}
   .chips{display:flex; flex-wrap:wrap; gap:8px;}
-  .chip{font-size:11px; background:rgba(255,255,255,0.05); border:1px solid var(--border); color:var(--text-dim); padding:5px 10px; border-radius:16px;}
+  .chip{font-size:11px; background:rgba(255,255,255,0.06); border:1px solid var(--border); color:var(--text-dim); padding:5px 10px; border-radius:16px; backdrop-filter:var(--glass-blur); -webkit-backdrop-filter:var(--glass-blur);}
 
   /* ---------- Experience accordion (Lalitha-style) ---------- */
   .job{background:var(--bg-card); border:1px solid var(--border); border-radius:16px; padding:0; overflow:hidden;
-    box-shadow:0 0 0 1px rgba(127,174,111,0.1), 0 20px 45px -20px rgba(0,0,0,.6), 0 0 40px -16px rgba(127,174,111,0.22);
+    backdrop-filter:var(--glass-blur); -webkit-backdrop-filter:var(--glass-blur);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.08), 0 0 0 1px rgba(127,174,111,0.1), 0 20px 45px -20px rgba(0,0,0,.6), 0 0 40px -16px rgba(127,174,111,0.22);
     transition:transform .35s cubic-bezier(.22,.85,.32,1), box-shadow .35s ease;}
   .job:hover{transform:translateY(-4px); box-shadow:0 26px 55px -16px rgba(80,110,60,.5);}
   .job-head{display:flex; align-items:center; gap:18px; padding:22px 24px; cursor:pointer; user-select:none;}
@@ -185,22 +188,57 @@
   .job.open .job-body{max-height:2400px;}
   .job-body-inner{padding:0 24px 26px; border-top:1px solid var(--border); padding-top:22px;}
   .job-metrics{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; margin-bottom:20px;}
-  .job-metric{background:rgba(255,255,255,0.05); border-radius:12px; padding:14px 12px; text-align:center;}
+  .job-metric{background:rgba(255,255,255,0.06); border:1px solid var(--border); border-radius:12px; padding:14px 12px; text-align:center; backdrop-filter:var(--glass-blur); -webkit-backdrop-filter:var(--glass-blur);}
   .job-metric .num{font-size:19px; font-weight:700; color:var(--text); font-family:var(--serif); font-style:italic;}
   .job-metric .lbl{font-size:10px; color:var(--text-mute); text-transform:uppercase; letter-spacing:.04em; margin-top:4px;}
   .job ul{padding-left:18px; color:var(--text-dim); font-size:13.5px; display:flex; flex-direction:column; gap:9px; margin-bottom:18px;}
   .job ul li::marker{color:var(--accent-green);}
   @media(max-width:700px){ .job-metrics{grid-template-columns:repeat(2,minmax(0,1fr));} .job-head{padding:18px;} }
 
-  .projects{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px; margin-top:36px;}
+  .projects{display:flex; flex-direction:column; gap:64px; margin-top:40px;}
+  .proj{background:none; border:none; box-shadow:none; padding:0; backdrop-filter:none; -webkit-backdrop-filter:none;
+    display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:center;}
+  .proj:nth-child(even) .proj-banner{order:2;}
+  .proj:nth-child(even) .proj-text{order:1;}
   .proj .tag{font-size:11px; color:var(--accent); text-transform:uppercase; letter-spacing:.06em; margin-bottom:8px;}
-  .proj h3{font-family:var(--serif); font-style:italic; font-size:22px; margin-bottom:6px; color:var(--text);}
+  .proj h3{font-family:var(--serif); font-style:italic; font-size:24px; margin-bottom:6px; color:var(--text);}
   .proj p.sub{color:var(--text-dim); font-size:13px; margin-bottom:16px;}
-  .proj .metrics{display:flex; gap:10px; margin-bottom:16px;}
-  .proj .metric{flex:1; background:rgba(255,255,255,0.05); border-radius:10px; padding:10px; text-align:center;}
+  .proj p.narrative{color:var(--text-dim); font-size:14px; line-height:1.7; margin-bottom:18px;}
+  .proj .metrics{display:flex; gap:10px; margin-bottom:18px;}
+  .proj .metric{flex:1; background:rgba(255,255,255,0.06); border:1px solid var(--border); border-radius:10px; padding:10px; text-align:center; backdrop-filter:var(--glass-blur); -webkit-backdrop-filter:var(--glass-blur);}
   .proj .metric .num{font-size:16px; font-weight:700; color:var(--text);}
   .proj .metric .lbl{font-size:10px; color:var(--text-mute); text-transform:uppercase;}
-  .proj ul{padding-left:18px; color:var(--text-dim); font-size:13px; display:flex; flex-direction:column; gap:6px;}
+  .proj ul{padding-left:18px; color:var(--text-dim); font-size:13px; display:flex; flex-direction:column; gap:8px; margin-bottom:16px;}
+  .proj ul li::marker{color:var(--accent-green);}
+  @media(max-width:860px){
+    .proj{grid-template-columns:1fr;}
+    .proj:nth-child(even) .proj-banner, .proj:nth-child(even) .proj-text{order:initial;}
+  }
+
+  /* ---------- Project banners (Lalitha-style illustrated panels) ---------- */
+  .proj-banner{position:relative; height:280px; border-radius:20px; overflow:hidden; border:1px solid var(--border);
+    background:
+      radial-gradient(circle at 25% 22%, rgba(231,195,122,.3), transparent 50%),
+      radial-gradient(circle at 80% 78%, rgba(127,174,111,.34), transparent 55%),
+      repeating-linear-gradient(45deg, rgba(255,255,255,.03) 0 2px, transparent 2px 26px),
+      linear-gradient(160deg, #1a2011, #0b0e07);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.08), 0 20px 45px -20px rgba(0,0,0,.6);
+    backdrop-filter:var(--glass-blur); -webkit-backdrop-filter:var(--glass-blur);
+  }
+  .proj-banner .banner-tag{position:absolute; top:16px; left:18px; font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--accent); font-weight:700; background:rgba(10,13,8,.5); padding:5px 11px; border-radius:20px; border:1px solid var(--border); backdrop-filter:var(--glass-blur); -webkit-backdrop-filter:var(--glass-blur);}
+  .proj-banner svg.banner-lines{position:absolute; inset:0; width:100%; height:100%;}
+  .proj-banner .banner-core{position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:76px; height:76px; border-radius:50%;
+    background:linear-gradient(135deg,#f3e3b8,#e7c37a); display:flex; align-items:center; justify-content:center; font-size:32px;
+    box-shadow:0 0 45px rgba(231,195,122,.5), inset 0 1px 0 rgba(255,255,255,.5);}
+  .proj-banner .banner-node{position:absolute; background:rgba(10,13,8,.55); border:1px solid var(--border); border-radius:12px; padding:7px 12px;
+    font-size:11px; color:var(--text-dim); display:flex; align-items:center; gap:6px; white-space:nowrap;
+    backdrop-filter:var(--glass-blur); -webkit-backdrop-filter:var(--glass-blur); box-shadow:inset 0 1px 0 rgba(255,255,255,.06);}
+  .proj-banner .banner-node .ic{font-size:14px;}
+  .proj-banner .n1{top:16%; left:6%;}
+  .proj-banner .n2{top:16%; right:6%;}
+  .proj-banner .n3{bottom:14%; left:8%;}
+  .proj-banner .n4{bottom:14%; right:5%;}
+  @media(max-width:860px){ .proj-banner{height:240px;} .proj-banner .banner-node{font-size:10px; padding:5px 9px;} }
 
   .certs{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; margin-top:36px;}
   .cert .verified{font-size:10px; color:var(--accent-green); text-transform:uppercase; letter-spacing:.06em; margin-bottom:8px;}
@@ -505,36 +543,81 @@
     <p class="lead reveal">Generative AI, RAG, and NLP systems built end-to-end — from pipeline to evaluation.</p>
     <div class="projects">
       <div class="proj">
-        <div class="tag">Generative AI &amp; LLM engineering</div>
-        <h3>Enterprise Generative AI knowledge assistant</h3>
-        <p class="sub">RAG assistant, vector search &amp; LLM evaluation with MLflow</p>
-        <div class="metrics">
-          <div class="metric"><div class="num">96.4%</div><div class="lbl">Retrieval accuracy</div></div>
-          <div class="metric"><div class="num">Sub-sec</div><div class="lbl">Query speed</div></div>
-          <div class="metric"><div class="num">100%</div><div class="lbl">Eval tracking</div></div>
+        <div class="proj-banner">
+          <div class="banner-tag">Flagship &middot; 01</div>
+          <svg class="banner-lines" viewBox="0 0 100 100" preserveAspectRatio="none">
+            <path d="M12 20 L50 50" stroke="rgba(178,204,166,.4)" stroke-width=".6" stroke-dasharray="2 2"/>
+            <path d="M88 20 L50 50" stroke="rgba(178,204,166,.4)" stroke-width=".6" stroke-dasharray="2 2"/>
+            <path d="M14 82 L50 50" stroke="rgba(178,204,166,.4)" stroke-width=".6" stroke-dasharray="2 2"/>
+            <path d="M86 82 L50 50" stroke="rgba(178,204,166,.4)" stroke-width=".6" stroke-dasharray="2 2"/>
+          </svg>
+          <div class="banner-node n1"><span class="ic">📄</span>Enterprise Docs</div>
+          <div class="banner-node n2"><span class="ic">🔎</span>Vector Search</div>
+          <div class="banner-node n3"><span class="ic">⚙️</span>FastAPI</div>
+          <div class="banner-node n4"><span class="ic">💬</span>Grounded Answer</div>
+          <div class="banner-core">🧠</div>
         </div>
-        <ul>
-          <li>LangChain &amp; LlamaIndex RAG architecture with vector search</li>
-          <li>Python FastAPI pipeline for semantic chunking &amp; retrieval</li>
-          <li>MLflow tracking for prompt versions &amp; LLM evaluation</li>
-          <li>Grounded answers with source context attribution</li>
-        </ul>
+        <div class="proj-text">
+          <div class="tag">Generative AI &amp; LLM engineering</div>
+          <h3>Enterprise Generative AI knowledge assistant</h3>
+          <p class="sub">RAG assistant, vector search &amp; LLM evaluation with MLflow</p>
+          <p class="narrative">High query volume and scattered internal documentation slowed enterprise decision-making. I designed a production RAG assistant that retrieves grounded context before generation, so every answer is traceable to a source and trusted by both leadership and compliance reviewers.</p>
+          <div class="metrics">
+            <div class="metric"><div class="num">96.4%</div><div class="lbl">Retrieval accuracy</div></div>
+            <div class="metric"><div class="num">Sub-sec</div><div class="lbl">Query speed</div></div>
+            <div class="metric"><div class="num">100%</div><div class="lbl">Eval tracking</div></div>
+          </div>
+          <ul>
+            <li>Architected a LangChain &amp; LlamaIndex RAG pipeline with vector search, achieving 96.4% retrieval accuracy across enterprise knowledge sources.</li>
+            <li>Built a Python FastAPI service for semantic chunking, embedding generation, and low-latency retrieval, keeping query response times sub-second at scale.</li>
+            <li>Implemented MLflow tracking for prompt versions, retrieval configs, and evaluation runs, giving 100% traceability across every LLM experiment.</li>
+            <li>Grounded every generated answer with source context attribution, reducing hallucination risk for enterprise decision-makers.</li>
+            <li>Designed evaluation harnesses to benchmark answer relevance, faithfulness, and latency before each production release.</li>
+            <li>Partnered with platform and compliance teams to define guardrails, access controls, and audit logging for enterprise-safe deployment.</li>
+          </ul>
+          <div class="chips">
+            <span class="chip">LangChain</span><span class="chip">LlamaIndex</span><span class="chip">Vector Search</span><span class="chip">Python</span><span class="chip">FastAPI</span><span class="chip">MLflow</span><span class="chip">RAG Pipelines</span><span class="chip">LLM Evaluation</span>
+          </div>
+        </div>
       </div>
+
       <div class="proj">
-        <div class="tag">Deep learning &amp; NLP</div>
-        <h3>NLP claim review &amp; member communication intelligence</h3>
-        <p class="sub">Fine-tuned BERT models, NER &amp; healthcare text analytics</p>
-        <div class="metrics">
-          <div class="metric"><div class="num">94.2%</div><div class="lbl">Categorization acc.</div></div>
-          <div class="metric"><div class="num">+40%</div><div class="lbl">Review efficiency</div></div>
-          <div class="metric"><div class="num">Auto</div><div class="lbl">Entity extraction</div></div>
+        <div class="proj-banner">
+          <div class="banner-tag">Flagship &middot; 02</div>
+          <svg class="banner-lines" viewBox="0 0 100 100" preserveAspectRatio="none">
+            <path d="M12 20 L50 50" stroke="rgba(178,204,166,.4)" stroke-width=".6" stroke-dasharray="2 2"/>
+            <path d="M88 20 L50 50" stroke="rgba(178,204,166,.4)" stroke-width=".6" stroke-dasharray="2 2"/>
+            <path d="M14 82 L50 50" stroke="rgba(178,204,166,.4)" stroke-width=".6" stroke-dasharray="2 2"/>
+            <path d="M86 82 L50 50" stroke="rgba(178,204,166,.4)" stroke-width=".6" stroke-dasharray="2 2"/>
+          </svg>
+          <div class="banner-node n1"><span class="ic">📝</span>Claim Notes</div>
+          <div class="banner-node n2"><span class="ic">🤖</span>BERT Fine-tune</div>
+          <div class="banner-node n3"><span class="ic">🏷️</span>NER Entities</div>
+          <div class="banner-node n4"><span class="ic">✅</span>94.2% Accuracy</div>
+          <div class="banner-core">📋</div>
         </div>
-        <ul>
-          <li>PyTorch &amp; Hugging Face BERT fine-tuning for claims text</li>
-          <li>NER &amp; embedding extraction from unstructured care notes</li>
-          <li>Multi-class categorization for clinical, billing &amp; service notes</li>
-          <li>Precision-recall &amp; error analysis for trustworthy results</li>
-        </ul>
+        <div class="proj-text">
+          <div class="tag">Deep learning &amp; NLP</div>
+          <h3>NLP claim review &amp; member communication intelligence</h3>
+          <p class="sub">Fine-tuned BERT models, NER &amp; healthcare text analytics</p>
+          <p class="narrative">A high volume of unstructured claim notes and member communications required manual review, creating processing bottlenecks and inconsistent categorization. I fine-tuned BERT-based models to automatically classify and extract structured signal from free-text healthcare records, cutting review time while keeping results auditable.</p>
+          <div class="metrics">
+            <div class="metric"><div class="num">94.2%</div><div class="lbl">Categorization acc.</div></div>
+            <div class="metric"><div class="num">+40%</div><div class="lbl">Review efficiency</div></div>
+            <div class="metric"><div class="num">Auto</div><div class="lbl">Entity extraction</div></div>
+          </div>
+          <ul>
+            <li>Fine-tuned BERT transformer models with PyTorch &amp; Hugging Face to classify claim notes into clinical, billing, eligibility, and service categories at 94.2% accuracy.</li>
+            <li>Built NER and embedding extraction pipelines to surface entities from unstructured care notes that were previously reviewed manually.</li>
+            <li>Automated multi-class categorization for clinical, billing, and service-related communications, cutting manual review effort by 40%.</li>
+            <li>Evaluated model outputs through precision-recall analysis, classification reports, and segment-level error review to build reviewer trust.</li>
+            <li>Reduced processing bottlenecks by replacing manual triage with automated, explainable text classification.</li>
+            <li>Partnered with healthcare operations and QA teams to validate categorization accuracy against HIPAA-aligned review standards.</li>
+          </ul>
+          <div class="chips">
+            <span class="chip">PyTorch</span><span class="chip">Hugging Face</span><span class="chip">BERT</span><span class="chip">Named Entity Recognition</span><span class="chip">Embeddings</span><span class="chip">Python</span><span class="chip">Precision-Recall</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
