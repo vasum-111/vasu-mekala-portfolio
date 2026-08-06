@@ -16,7 +16,7 @@
     --accent:#e7c37a; --accent-green:#7fae6f; --border:rgba(127,174,111,0.28);
     --glow-gold:rgba(231,195,122,.35); --glow-green:rgba(127,174,111,.32);
     --serif:'Playfair Display', serif; --sans:'Inter', sans-serif;
-    --maxw:1100px;
+    --maxw:1100px; --sidebar-w:258px;
   }
   *{box-sizing:border-box; margin:0; padding:0;}
   html{scroll-behavior:smooth;}
@@ -49,6 +49,10 @@
     0%,100%{box-shadow:0 0 0 0 rgba(231,195,122,.35);}
     50%{box-shadow:0 0 14px 3px rgba(231,195,122,.35);}
   }
+  @keyframes sidebarPulse{
+    0%,100%{box-shadow:0 0 0 0 rgba(127,174,111,.35);}
+    50%{box-shadow:0 0 0 4px rgba(127,174,111,0);}
+  }
 
   body{background:linear-gradient(160deg, var(--bg) 0%, var(--bg-2) 35%, var(--bg-3) 70%, var(--bg) 100%); color:var(--text); font-family:var(--sans); line-height:1.65;}
   a{color:inherit; text-decoration:none;}
@@ -59,13 +63,39 @@
   .eyebrow{font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--accent); font-weight:600; margin-bottom:12px;}
   .lead{color:var(--text-dim); font-size:16px; max-width:640px; margin-bottom:40px;}
 
-  header{position:sticky; top:0; z-index:50; background:rgba(10,13,8,.75); backdrop-filter:blur(12px) saturate(140%); border-bottom:1px solid var(--border);}
-  header .wrap{display:flex; align-items:center; justify-content:space-between; padding:16px 24px;}
-  .logo{font-family:var(--serif); font-style:italic; font-size:20px;}
-  nav{display:flex; gap:22px; font-size:13px; color:var(--text-dim);}
-  nav a:hover{color:var(--text);}
-  header .cta{display:flex; gap:10px;}
-  .btn{font-size:13px; font-weight:600; padding:9px 16px; border-radius:24px; border:1px solid var(--border); white-space:nowrap; transition:transform .3s ease, box-shadow .3s ease;}
+  /* ---------- Left sidebar navigation ---------- */
+  .sidebar{
+    position:fixed; top:0; left:0; bottom:0; width:var(--sidebar-w); z-index:100;
+    background:rgba(10,13,8,.92); backdrop-filter:blur(14px) saturate(140%);
+    border-right:1px solid var(--border);
+    display:flex; flex-direction:column; padding:34px 22px 24px;
+    overflow-y:auto;
+  }
+  .sidebar-brand{display:flex; flex-direction:column; gap:3px; margin-bottom:8px;}
+  .sidebar-brand .logo-row{display:flex; align-items:center; gap:9px;}
+  .sidebar-brand .logo-dot{width:9px; height:9px; border-radius:50%; background:var(--accent-green); animation:sidebarPulse 2.4s ease-in-out infinite; flex:none;}
+  .sidebar-brand .logo{font-family:var(--serif); font-style:italic; font-size:21px; color:var(--text);}
+  .sidebar-brand .role-sub{font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--text-mute); margin-left:18px;}
+
+  .sidebar-nav{display:flex; flex-direction:column; gap:3px; margin-top:34px;}
+  .sidebar-nav a{
+    display:flex; align-items:center; gap:11px; padding:10px 13px; border-radius:10px;
+    font-size:13.5px; font-weight:500; color:var(--text-dim);
+    border:1px solid transparent; transition:background .25s ease, color .25s ease, border-color .25s ease, transform .25s ease;
+  }
+  .sidebar-nav a .ic{width:17px; text-align:center; font-size:14px; flex:none; opacity:.9;}
+  .sidebar-nav a:hover{background:rgba(255,255,255,0.045); color:var(--text); transform:translateX(2px);}
+  .sidebar-nav a.active{
+    background:linear-gradient(135deg, rgba(127,174,111,.16), rgba(231,195,122,.10));
+    border-color:var(--border); color:var(--text); font-weight:600;
+  }
+
+  .sidebar-bottom{margin-top:auto; padding-top:22px; display:flex; flex-direction:column; gap:10px;}
+  .sidebar .btn{width:100%; text-align:center;}
+
+  .main{margin-left:var(--sidebar-w);}
+
+  .btn{font-size:13px; font-weight:600; padding:9px 16px; border-radius:24px; border:1px solid var(--border); white-space:nowrap; transition:transform .3s ease, box-shadow .3s ease; display:inline-block;}
   .btn-solid{background:linear-gradient(135deg,#f3e3b8,#e7c37a); color:#22261a; animation:btnGlow 4s ease-in-out infinite; border:none;}
   .btn-solid:hover{transform:translateY(-2px);}
   .btn-outline{color:var(--text); background:rgba(255,255,255,0.04);}
@@ -162,36 +192,48 @@
   footer .foot-line{display:inline-block; white-space:nowrap; animation:oneWayDrift 6s linear infinite;}
   footer .tagline{margin-top:8px; font-size:11px; color:var(--text-mute);}
 
+  @media(max-width:900px){
+    .sidebar{position:static; width:100%; height:auto; flex-direction:row; align-items:center; justify-content:space-between; padding:14px 20px; border-right:none; border-bottom:1px solid var(--border); overflow-y:visible;}
+    .sidebar-brand{margin-bottom:0;}
+    .sidebar-brand .role-sub{display:none;}
+    .sidebar-nav{display:none;}
+    .sidebar-bottom{margin-top:0; flex-direction:row; padding-top:0;}
+    .sidebar .btn{width:auto;}
+    .main{margin-left:0;}
+  }
   @media(max-width:760px){
-    nav{display:none;}
     .hero h1{font-size:32px;}
     .stats{flex-direction:column; align-items:center;}
     .stat{border-left:none; border-top:1px solid var(--border);}
     .stat:first-child{border-top:none;}
     .grid-4, .projects, .certs, .contact-grid{grid-template-columns:1fr;}
+    .sidebar-bottom .btn:first-child{display:none;}
   }
 </style>
 </head>
 <body>
 
-<header>
-  <div class="wrap">
-    <div class="logo">Vasu.</div>
-    <nav>
-      <a href="#about">About</a>
-      <a href="#experience">Experience</a>
-      <a href="#projects">Projects</a>
-      <a href="#skills">Skills</a>
-      <a href="#certifications">Certifications</a>
-      <a href="#education">Education</a>
-      <a href="#contact">Contact</a>
-    </nav>
-    <div class="cta">
-      <a class="btn btn-outline" href="https://www.linkedin.com/in/vasu-mekala-data" target="_blank" rel="noopener">LinkedIn</a>
-      <a class="btn btn-solid" href="#contact">Resume</a>
-    </div>
+<aside class="sidebar">
+  <div class="sidebar-brand">
+    <div class="logo-row"><span class="logo-dot"></span><span class="logo">Vasu.dev</span></div>
+    <div class="role-sub">AI/ML Engineering</div>
   </div>
-</header>
+  <nav class="sidebar-nav">
+    <a href="#about" data-section="about"><span class="ic">◆</span>Platform</a>
+    <a href="#experience" data-section="experience"><span class="ic">▤</span>Experience</a>
+    <a href="#projects" data-section="projects"><span class="ic">▣</span>Projects</a>
+    <a href="#skills" data-section="skills"><span class="ic">◈</span>Skills</a>
+    <a href="#education" data-section="education"><span class="ic">🎓</span>Education</a>
+    <a href="#certifications" data-section="certifications"><span class="ic">✓</span>Certifications</a>
+    <a href="#contact" data-section="contact"><span class="ic">✉</span>Contact</a>
+  </nav>
+  <div class="sidebar-bottom">
+    <a class="btn btn-outline" href="https://www.linkedin.com/in/vasu-mekala-data" target="_blank" rel="noopener">LinkedIn</a>
+    <a class="btn btn-solid" href="#contact">Download Resume</a>
+  </div>
+</aside>
+
+<div class="main">
 
 <section class="hero">
   <div class="ambient-orb orb1"></div>
@@ -452,6 +494,8 @@
   <div class="tagline">AI/ML Engineering &amp; Generative AI Portfolio</div>
 </footer>
 
+</div>
+
 <script>
   // Scroll-reveal for cards and headings
   const revealTargets = document.querySelectorAll('.card, .job, .proj, .cert, .contact-card, .edu, h2.reveal, .lead.reveal');
@@ -503,6 +547,22 @@
     });
   }, { threshold: 0.3 });
   countEls.forEach(el => countIo.observe(el));
+
+  // Sidebar scroll-spy: highlight the nav link for the section in view
+  const sidebarLinks = document.querySelectorAll('.sidebar-nav a');
+  const spySections = document.querySelectorAll('section[id]');
+  const spyIo = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const id = entry.target.getAttribute('id');
+      const link = document.querySelector('.sidebar-nav a[data-section="' + id + '"]');
+      if (!link) return;
+      if (entry.isIntersecting) {
+        sidebarLinks.forEach(a => a.classList.remove('active'));
+        link.classList.add('active');
+      }
+    });
+  }, { threshold: 0.35, rootMargin: '-10% 0px -50% 0px' });
+  spySections.forEach(sec => spyIo.observe(sec));
 </script>
 
 </body>
