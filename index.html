@@ -247,30 +247,53 @@
     .proj:nth-child(even) .proj-banner, .proj:nth-child(even) .proj-text{order:initial;}
   }
 
-  /* ---------- Project banners (Lalitha-style illustrated panels) ---------- */
-  .proj-banner{position:relative; height:280px; border-radius:20px; overflow:hidden; border:1px solid var(--border);
+  /* ---------- Project banners: realistic app-screenshot mockups ---------- */
+  .proj-banner{position:relative; min-height:280px; border-radius:20px; overflow:hidden; border:1px solid var(--border);
+    display:flex; align-items:center; justify-content:center; padding:34px 26px 26px;
     background:
-      radial-gradient(circle at 25% 22%, rgba(231,195,122,.3), transparent 50%),
-      radial-gradient(circle at 80% 78%, rgba(127,174,111,.34), transparent 55%),
-      repeating-linear-gradient(45deg, rgba(255,255,255,.03) 0 2px, transparent 2px 26px),
+      radial-gradient(circle at 25% 15%, rgba(231,195,122,.16), transparent 55%),
       linear-gradient(160deg, var(--banner-g1), var(--banner-g2));
     box-shadow:inset 0 1px 0 rgba(255,255,255,.08), 0 20px 45px -20px rgba(0,0,0,.6);
     backdrop-filter:var(--glass-blur); -webkit-backdrop-filter:var(--glass-blur);
   }
-  .proj-banner .banner-tag{position:absolute; top:16px; left:18px; font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--accent); font-weight:700; background:var(--node-bg); padding:5px 11px; border-radius:20px; border:1px solid var(--border); backdrop-filter:var(--glass-blur); -webkit-backdrop-filter:var(--glass-blur);}
-  .proj-banner svg.banner-lines{position:absolute; inset:0; width:100%; height:100%;}
-  .proj-banner .banner-core{position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:76px; height:76px; border-radius:50%;
-    background:linear-gradient(135deg,#f3e3b8,#e7c37a); display:flex; align-items:center; justify-content:center; font-size:32px;
-    box-shadow:0 0 45px rgba(231,195,122,.5), inset 0 1px 0 rgba(255,255,255,.5);}
-  .proj-banner .banner-node{position:absolute; background:var(--node-bg); border:1px solid var(--border); border-radius:12px; padding:7px 12px;
-    font-size:11px; color:var(--text-dim); display:flex; align-items:center; gap:6px; white-space:nowrap;
-    backdrop-filter:var(--glass-blur); -webkit-backdrop-filter:var(--glass-blur); box-shadow:inset 0 1px 0 rgba(255,255,255,.06);}
-  .proj-banner .banner-node .ic{font-size:14px;}
-  .proj-banner .n1{top:16%; left:6%;}
-  .proj-banner .n2{top:16%; right:6%;}
-  .proj-banner .n3{bottom:14%; left:8%;}
-  .proj-banner .n4{bottom:14%; right:5%;}
-  @media(max-width:860px){ .proj-banner{height:240px;} .proj-banner .banner-node{font-size:10px; padding:5px 9px;} }
+  .proj-banner .banner-tag{position:absolute; top:16px; left:18px; font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--accent); font-weight:700; background:var(--node-bg); padding:5px 11px; border-radius:20px; border:1px solid var(--border); backdrop-filter:var(--glass-blur); -webkit-backdrop-filter:var(--glass-blur); z-index:2;}
+  @media(max-width:860px){ .proj-banner{min-height:240px;} }
+
+  /* realistic browser-window mockup */
+  .mockwin{width:100%; max-width:420px; border-radius:12px; overflow:hidden; background:#eeebe0;
+    box-shadow:0 30px 60px -18px rgba(0,0,0,.65), 0 0 0 1px rgba(255,255,255,.06); transform:translateY(4px);}
+  .mockwin-bar{height:30px; background:linear-gradient(180deg,#2c3020,#1c1f15); display:flex; align-items:center; gap:6px; padding:0 12px;}
+  .mockwin-dot{width:8px; height:8px; border-radius:50%; flex:none;}
+  .mockwin-dot.r{background:#e5685c;} .mockwin-dot.y{background:#e7c15c;} .mockwin-dot.g{background:#5cbf6a;}
+  .mockwin-url{margin-left:10px; font-size:9.5px; color:#a9ad9c; background:rgba(255,255,255,.07); padding:3px 12px; border-radius:6px; flex:1; max-width:230px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+  .mockwin-body{background:#f2f0e6; color:#2b2e22; padding:16px 18px 18px; font-family:var(--sans);}
+
+  /* mock 1: RAG chat assistant */
+  .mock-chat-row{display:flex; margin-bottom:9px;}
+  .mock-chat-row.user{justify-content:flex-end;}
+  .mock-bubble{max-width:82%; border-radius:12px; padding:8px 12px; font-size:11px; line-height:1.5;}
+  .mock-bubble.user{background:#dcd8c6; color:#2b2e22; border-bottom-right-radius:4px;}
+  .mock-bubble.ai{background:#ffffff; border:1px solid #e2e0d0; border-left:3px solid #e7c37a; border-bottom-left-radius:4px; box-shadow:0 4px 10px -6px rgba(0,0,0,.15);}
+  .mock-line{height:6px; border-radius:4px; background:#dfddce; margin-bottom:6px;}
+  .mock-line.w85{width:85%;} .mock-line.w95{width:95%;} .mock-line.w55{width:55%;}
+  .mock-sources{display:flex; gap:6px; margin-top:8px; flex-wrap:wrap;}
+  .mock-sources span{font-size:9px; background:#f4f1e4; border:1px solid #e2ded0; padding:3px 8px; border-radius:10px; color:#6b6a55;}
+  .mock-stat-row{display:flex; gap:8px; margin-top:12px;}
+  .mock-stat{font-size:9px; font-weight:700; letter-spacing:.03em; background:#20241a; color:#f3e3b8; padding:5px 10px; border-radius:14px;}
+
+  /* mock 2: claim-classifier dashboard */
+  .mock-dash-head{display:flex; justify-content:space-between; align-items:center; font-size:11.5px; font-weight:700; color:#2b2e22; margin-bottom:11px;}
+  .mock-live{font-size:9px; color:#2e8f52; font-weight:700;}
+  .mock-row{display:flex; align-items:center; justify-content:space-between; gap:10px; background:#fff; border:1px solid #e2e0d0; border-radius:10px; padding:8px 11px; margin-bottom:7px;}
+  .mock-snippet{font-size:10px; color:#4b4a3d; line-height:1.5; flex:1;}
+  .mock-snippet mark{background:none; padding:0 1px; border-bottom:2px solid; font-weight:600;}
+  .mock-snippet mark.hl-clin{border-color:#7fae6f; color:#3c5c33;}
+  .mock-snippet mark.hl-bill{border-color:#e7c37a; color:#8a6a26;}
+  .mock-snippet mark.hl-elig{border-color:#c98f6a; color:#8a4f2c;}
+  .mock-tag{font-size:8.5px; font-weight:700; padding:4px 9px; border-radius:10px; white-space:nowrap;}
+  .mock-tag.clin{background:rgba(127,174,111,.2); color:#3c5c33;}
+  .mock-tag.bill{background:rgba(231,195,122,.26); color:#8a6a26;}
+  .mock-tag.elig{background:rgba(201,143,106,.24); color:#8a4f2c;}
 
   .certs{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; margin-top:36px;}
   .cert{display:flex; flex-direction:column;}
@@ -294,21 +317,32 @@
   .tf-pill{font-size:12.5px; font-weight:600; padding:9px 18px; border-radius:20px; border:1px solid var(--border); background:var(--surface-1); color:var(--text-dim); cursor:pointer; transition:all .25s ease; backdrop-filter:var(--glass-blur); -webkit-backdrop-filter:var(--glass-blur);}
   .tf-pill.active{background:linear-gradient(135deg,#f3e3b8,#e7c37a); color:#22261a; border-color:transparent;}
   .tf-pill:hover:not(.active){border-color:var(--accent-green); color:var(--text);}
+
+  .tech-grid-wrap{position:relative; border-radius:16px;}
   .tech-grid{display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:14px;}
-  .tech-tile{background:var(--bg-card); border:1px solid var(--border); border-radius:14px; padding:20px 10px; text-align:center; backdrop-filter:var(--glass-blur); -webkit-backdrop-filter:var(--glass-blur); transition:transform .3s ease, box-shadow .3s ease; box-shadow:inset 0 1px 0 rgba(255,255,255,.07);}
+  .tech-tile{background:var(--bg-card); border:1px solid var(--border); border-bottom:3px solid var(--acc, var(--border)); border-radius:14px; padding:24px 14px; text-align:center; backdrop-filter:var(--glass-blur); -webkit-backdrop-filter:var(--glass-blur); transition:transform .3s ease, box-shadow .3s ease, opacity .4s ease; box-shadow:inset 0 1px 0 rgba(255,255,255,.07);}
   .tech-tile:hover{transform:translateY(-4px); box-shadow:0 18px 34px -14px rgba(80,110,60,.5);}
   .tech-tile.tech-hidden{display:none;}
-  @keyframes tileCurtain{
-    0%{opacity:0; transform:translateY(-24px) scale(.92);}
-    65%{opacity:1; transform:translateY(4px) scale(1.02);}
-    100%{opacity:1; transform:translateY(0) scale(1);}
-  }
-  .tech-tile.tile-drop{animation:tileCurtain .5s cubic-bezier(.22,.85,.32,1) both;}
-  .tech-icon{width:44px; height:44px; border-radius:12px; margin:0 auto 12px; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:800; color:#171c10; letter-spacing:.01em;}
-  .tech-label{font-size:11.5px; color:var(--text-dim); font-weight:500;}
+  .tech-tile.tile-pre{opacity:0; transform:translateY(-10px);}
+  .tech-label{font-size:12.5px; color:var(--text); font-weight:600; letter-spacing:.01em;}
   .tech-count{margin-top:26px; text-align:center; font-size:12px; color:var(--text-mute); letter-spacing:.03em;}
   @media(max-width:860px){ .tech-grid{grid-template-columns:repeat(3,minmax(0,1fr));} }
   @media(max-width:520px){ .tech-grid{grid-template-columns:repeat(2,minmax(0,1fr));} }
+
+  /* ---------- Tech Stack curtain: a real fabric panel drops top-to-bottom, unveiling tiles as it passes ---------- */
+  .tech-curtain{
+    position:absolute; top:0; left:0; right:0; bottom:0; z-index:5; pointer-events:none; display:none;
+    border-radius:16px;
+    background:
+      repeating-linear-gradient(90deg, rgba(0,0,0,.17) 0 4px, transparent 4px 38px),
+      linear-gradient(180deg, #e2c079 0%, #cd9e50 30%, #a97a34 66%, #7c5a26 100%);
+    box-shadow:0 30px 60px -16px rgba(0,0,0,.6), inset 0 3px 0 rgba(255,255,255,.2);
+  }
+  .tech-curtain::after{
+    content:""; position:absolute; left:0; right:0; bottom:-9px; height:18px;
+    background-image:radial-gradient(circle at 9px 0, transparent 8px, #7c5a26 9px);
+    background-size:18px 18px; background-repeat:repeat-x;
+  }
 
   /* ---------- Shared modal system (case studies + credential exhibits) ---------- */
   .modal-overlay{position:fixed; inset:0; z-index:1000; background:var(--overlay-bg); backdrop-filter:blur(6px); display:flex; align-items:center; justify-content:center; padding:24px; opacity:0; pointer-events:none; transition:opacity .3s ease;}
@@ -661,17 +695,24 @@
       <div class="proj">
         <div class="proj-banner">
           <div class="banner-tag">Flagship &middot; 01</div>
-          <svg class="banner-lines" viewBox="0 0 100 100" preserveAspectRatio="none">
-            <path d="M12 20 L50 50" stroke="rgba(178,204,166,.4)" stroke-width=".6" stroke-dasharray="2 2"/>
-            <path d="M88 20 L50 50" stroke="rgba(178,204,166,.4)" stroke-width=".6" stroke-dasharray="2 2"/>
-            <path d="M14 82 L50 50" stroke="rgba(178,204,166,.4)" stroke-width=".6" stroke-dasharray="2 2"/>
-            <path d="M86 82 L50 50" stroke="rgba(178,204,166,.4)" stroke-width=".6" stroke-dasharray="2 2"/>
-          </svg>
-          <div class="banner-node n1"><span class="ic">📄</span>Enterprise Docs</div>
-          <div class="banner-node n2"><span class="ic">🔎</span>Vector Search</div>
-          <div class="banner-node n3"><span class="ic">⚙️</span>FastAPI</div>
-          <div class="banner-node n4"><span class="ic">💬</span>Grounded Answer</div>
-          <div class="banner-core">🧠</div>
+          <div class="mockwin">
+            <div class="mockwin-bar">
+              <span class="mockwin-dot r"></span><span class="mockwin-dot y"></span><span class="mockwin-dot g"></span>
+              <span class="mockwin-url">enterprise-ai.assistant/chat</span>
+            </div>
+            <div class="mockwin-body">
+              <div class="mock-chat-row user"><div class="mock-bubble user">What's our Q3 enterprise refund policy?</div></div>
+              <div class="mock-chat-row ai">
+                <div class="mock-bubble ai">
+                  <div class="mock-line w85"></div>
+                  <div class="mock-line w95"></div>
+                  <div class="mock-line w55"></div>
+                  <div class="mock-sources"><span>📄 policy_v3.pdf</span><span>📄 refund_guide.docx</span></div>
+                </div>
+              </div>
+              <div class="mock-stat-row"><span class="mock-stat">96.4% Retrieval</span><span class="mock-stat">Sub-sec Latency</span></div>
+            </div>
+          </div>
         </div>
         <div class="proj-text">
           <div class="tag">Generative AI &amp; LLM engineering</div>
@@ -744,17 +785,19 @@
       <div class="proj">
         <div class="proj-banner">
           <div class="banner-tag">Flagship &middot; 02</div>
-          <svg class="banner-lines" viewBox="0 0 100 100" preserveAspectRatio="none">
-            <path d="M12 20 L50 50" stroke="rgba(178,204,166,.4)" stroke-width=".6" stroke-dasharray="2 2"/>
-            <path d="M88 20 L50 50" stroke="rgba(178,204,166,.4)" stroke-width=".6" stroke-dasharray="2 2"/>
-            <path d="M14 82 L50 50" stroke="rgba(178,204,166,.4)" stroke-width=".6" stroke-dasharray="2 2"/>
-            <path d="M86 82 L50 50" stroke="rgba(178,204,166,.4)" stroke-width=".6" stroke-dasharray="2 2"/>
-          </svg>
-          <div class="banner-node n1"><span class="ic">📝</span>Claim Notes</div>
-          <div class="banner-node n2"><span class="ic">🤖</span>BERT Fine-tune</div>
-          <div class="banner-node n3"><span class="ic">🏷️</span>NER Entities</div>
-          <div class="banner-node n4"><span class="ic">✅</span>94.2% Accuracy</div>
-          <div class="banner-core">📋</div>
+          <div class="mockwin">
+            <div class="mockwin-bar">
+              <span class="mockwin-dot r"></span><span class="mockwin-dot y"></span><span class="mockwin-dot g"></span>
+              <span class="mockwin-url">claims-nlp.internal/review</span>
+            </div>
+            <div class="mockwin-body">
+              <div class="mock-dash-head"><span>Claim Notes Classifier</span><span class="mock-live">&#9679; Model Live</span></div>
+              <div class="mock-row"><div class="mock-snippet">Patient presented with <mark class="hl-clin">chest pain</mark>, <mark class="hl-clin">admitted for observation</mark>.</div><span class="mock-tag clin">Clinical</span></div>
+              <div class="mock-row"><div class="mock-snippet">Requesting <mark class="hl-bill">prior authorization</mark> for <mark class="hl-bill">procedure 99213</mark>.</div><span class="mock-tag bill">Billing</span></div>
+              <div class="mock-row"><div class="mock-snippet">Member <mark class="hl-elig">coverage lapsed</mark>; verifying <mark class="hl-elig">eligibility status</mark>.</div><span class="mock-tag elig">Eligibility</span></div>
+              <div class="mock-stat-row"><span class="mock-stat">94.2% Accuracy</span><span class="mock-stat">+40% Efficiency</span></div>
+            </div>
+          </div>
         </div>
         <div class="proj-text">
           <div class="tag">Deep learning &amp; NLP</div>
@@ -843,41 +886,44 @@
       <button class="tf-pill" data-cat="gov" onclick="techFilter('gov',this)">Explainability &amp; Governance</button>
     </div>
 
-    <div class="tech-grid" id="techGrid">
-      <div class="tech-tile" data-cat="lang"><div class="tech-icon" style="background:#e7c37a;">PY</div><div class="tech-label">Python</div></div>
-      <div class="tech-tile" data-cat="lang"><div class="tech-icon" style="background:#e7c37a;">SQL</div><div class="tech-label">SQL</div></div>
-      <div class="tech-tile" data-cat="lang"><div class="tech-icon" style="background:#e7c37a;">R</div><div class="tech-label">R</div></div>
-      <div class="tech-tile" data-cat="lang"><div class="tech-icon" style="background:#e7c37a;">PS</div><div class="tech-label">PySpark</div></div>
-      <div class="tech-tile" data-cat="lang"><div class="tech-icon" style="background:#e7c37a;">PD</div><div class="tech-label">Pandas &amp; NumPy</div></div>
+    <div class="tech-grid-wrap" id="techGridWrap">
+      <div class="tech-grid" id="techGrid">
+        <div class="tech-tile" data-cat="lang" style="--acc:#e7c37a;"><div class="tech-label">Python</div></div>
+        <div class="tech-tile" data-cat="lang" style="--acc:#e7c37a;"><div class="tech-label">SQL</div></div>
+        <div class="tech-tile" data-cat="lang" style="--acc:#e7c37a;"><div class="tech-label">R</div></div>
+        <div class="tech-tile" data-cat="lang" style="--acc:#e7c37a;"><div class="tech-label">PySpark</div></div>
+        <div class="tech-tile" data-cat="lang" style="--acc:#e7c37a;"><div class="tech-label">Pandas &amp; NumPy</div></div>
 
-      <div class="tech-tile" data-cat="ml"><div class="tech-icon" style="background:#7fae6f;">SK</div><div class="tech-label">Scikit-learn</div></div>
-      <div class="tech-tile" data-cat="ml"><div class="tech-icon" style="background:#7fae6f;">XGB</div><div class="tech-label">XGBoost</div></div>
-      <div class="tech-tile" data-cat="ml"><div class="tech-icon" style="background:#7fae6f;">ML</div><div class="tech-label">Predictive Modeling</div></div>
-      <div class="tech-tile" data-cat="ml"><div class="tech-icon" style="background:#7fae6f;">CR</div><div class="tech-label">Classification &amp; Reg.</div></div>
-      <div class="tech-tile" data-cat="ml"><div class="tech-icon" style="background:#7fae6f;">UP</div><div class="tech-label">Propensity &amp; Uplift</div></div>
+        <div class="tech-tile" data-cat="ml" style="--acc:#7fae6f;"><div class="tech-label">Scikit-learn</div></div>
+        <div class="tech-tile" data-cat="ml" style="--acc:#7fae6f;"><div class="tech-label">XGBoost</div></div>
+        <div class="tech-tile" data-cat="ml" style="--acc:#7fae6f;"><div class="tech-label">Predictive Modeling</div></div>
+        <div class="tech-tile" data-cat="ml" style="--acc:#7fae6f;"><div class="tech-label">Classification &amp; Reg.</div></div>
+        <div class="tech-tile" data-cat="ml" style="--acc:#7fae6f;"><div class="tech-label">Propensity &amp; Uplift</div></div>
 
-      <div class="tech-tile" data-cat="dl"><div class="tech-icon" style="background:#6fae9e;">PT</div><div class="tech-label">PyTorch</div></div>
-      <div class="tech-tile" data-cat="dl"><div class="tech-icon" style="background:#6fae9e;">TF</div><div class="tech-label">TensorFlow</div></div>
-      <div class="tech-tile" data-cat="dl"><div class="tech-icon" style="background:#6fae9e;">HF</div><div class="tech-label">Hugging Face</div></div>
-      <div class="tech-tile" data-cat="dl"><div class="tech-icon" style="background:#6fae9e; font-size:9.5px;">BERT</div><div class="tech-label">BERT &amp; Transformers</div></div>
-      <div class="tech-tile" data-cat="dl"><div class="tech-icon" style="background:#6fae9e;">NER</div><div class="tech-label">NER &amp; Embeddings</div></div>
+        <div class="tech-tile" data-cat="dl" style="--acc:#6fae9e;"><div class="tech-label">PyTorch</div></div>
+        <div class="tech-tile" data-cat="dl" style="--acc:#6fae9e;"><div class="tech-label">TensorFlow</div></div>
+        <div class="tech-tile" data-cat="dl" style="--acc:#6fae9e;"><div class="tech-label">Hugging Face</div></div>
+        <div class="tech-tile" data-cat="dl" style="--acc:#6fae9e;"><div class="tech-label">BERT &amp; Transformers</div></div>
+        <div class="tech-tile" data-cat="dl" style="--acc:#6fae9e;"><div class="tech-label">NER &amp; Embeddings</div></div>
 
-      <div class="tech-tile" data-cat="genai"><div class="tech-icon" style="background:#d9a441;">LC</div><div class="tech-label">LangChain</div></div>
-      <div class="tech-tile" data-cat="genai"><div class="tech-icon" style="background:#d9a441;">LI</div><div class="tech-label">LlamaIndex</div></div>
-      <div class="tech-tile" data-cat="genai"><div class="tech-icon" style="background:#d9a441;">RAG</div><div class="tech-label">RAG Pipelines</div></div>
-      <div class="tech-tile" data-cat="genai"><div class="tech-icon" style="background:#d9a441;">VEC</div><div class="tech-label">Vector Search</div></div>
-      <div class="tech-tile" data-cat="genai"><div class="tech-icon" style="background:#d9a441;">PE</div><div class="tech-label">Prompt Engineering</div></div>
+        <div class="tech-tile" data-cat="genai" style="--acc:#d9a441;"><div class="tech-label">LangChain</div></div>
+        <div class="tech-tile" data-cat="genai" style="--acc:#d9a441;"><div class="tech-label">LlamaIndex</div></div>
+        <div class="tech-tile" data-cat="genai" style="--acc:#d9a441;"><div class="tech-label">RAG Pipelines</div></div>
+        <div class="tech-tile" data-cat="genai" style="--acc:#d9a441;"><div class="tech-label">Vector Search</div></div>
+        <div class="tech-tile" data-cat="genai" style="--acc:#d9a441;"><div class="tech-label">Prompt Engineering</div></div>
 
-      <div class="tech-tile" data-cat="mlops"><div class="tech-icon" style="background:#7f9aae;">MLF</div><div class="tech-label">MLflow</div></div>
-      <div class="tech-tile" data-cat="mlops"><div class="tech-icon" style="background:#7f9aae;">SM</div><div class="tech-label">AWS SageMaker</div></div>
-      <div class="tech-tile" data-cat="mlops"><div class="tech-icon" style="background:#7f9aae;">API</div><div class="tech-label">FastAPI</div></div>
-      <div class="tech-tile" data-cat="mlops"><div class="tech-icon" style="background:#7f9aae;">DKR</div><div class="tech-label">Docker</div></div>
-      <div class="tech-tile" data-cat="mlops"><div class="tech-icon" style="background:#7f9aae;">AF</div><div class="tech-label">Apache Airflow</div></div>
+        <div class="tech-tile" data-cat="mlops" style="--acc:#7f9aae;"><div class="tech-label">MLflow</div></div>
+        <div class="tech-tile" data-cat="mlops" style="--acc:#7f9aae;"><div class="tech-label">AWS SageMaker</div></div>
+        <div class="tech-tile" data-cat="mlops" style="--acc:#7f9aae;"><div class="tech-label">FastAPI</div></div>
+        <div class="tech-tile" data-cat="mlops" style="--acc:#7f9aae;"><div class="tech-label">Docker</div></div>
+        <div class="tech-tile" data-cat="mlops" style="--acc:#7f9aae;"><div class="tech-label">Apache Airflow</div></div>
 
-      <div class="tech-tile" data-cat="gov"><div class="tech-icon" style="background:#c98f6a; font-size:9.5px;">SHAP</div><div class="tech-label">SHAP &amp; LIME</div></div>
-      <div class="tech-tile" data-cat="gov"><div class="tech-icon" style="background:#c98f6a;">DB</div><div class="tech-label">Databricks ML</div></div>
-      <div class="tech-tile" data-cat="gov"><div class="tech-icon" style="background:#c98f6a;">GOV</div><div class="tech-label">SR 11-7 &amp; HIPAA</div></div>
-      <div class="tech-tile" data-cat="gov"><div class="tech-icon" style="background:#c98f6a;">AUC</div><div class="tech-label">ROC-AUC &amp; PSI</div></div>
+        <div class="tech-tile" data-cat="gov" style="--acc:#c98f6a;"><div class="tech-label">SHAP &amp; LIME</div></div>
+        <div class="tech-tile" data-cat="gov" style="--acc:#c98f6a;"><div class="tech-label">Databricks ML</div></div>
+        <div class="tech-tile" data-cat="gov" style="--acc:#c98f6a;"><div class="tech-label">SR 11-7 &amp; HIPAA</div></div>
+        <div class="tech-tile" data-cat="gov" style="--acc:#c98f6a;"><div class="tech-label">ROC-AUC &amp; PSI</div></div>
+      </div>
+      <div class="tech-curtain" id="techCurtain"></div>
     </div>
     <div class="tech-count" id="techCount">Showing 29 of 29 Technologies</div>
   </div>
@@ -1136,39 +1182,63 @@
   function prevSlide(id) { showSlide(id, (slideState[id] || 0) - 1); }
   function goToSlide(id, idx) { showSlide(id, idx); }
 
-  // Tech Stack category filter — cascading "curtain roll" reveal, one tile at a time
-  let techTimers = [];
+  // Tech Stack category filter — a real curtain panel drops top-to-bottom over the
+  // grid; skill tiles fade into place timed to the exact moment the curtain passes them.
+  let techCurtainTimer = null;
   function techFilter(cat, btn) {
     document.querySelectorAll('.tf-pill').forEach(p => p.classList.remove('active'));
     btn.classList.add('active');
 
-    techTimers.forEach(t => clearTimeout(t));
-    techTimers = [];
+    if (techCurtainTimer) { clearTimeout(techCurtainTimer); techCurtainTimer = null; }
 
+    const wrap = document.getElementById('techGridWrap');
+    const curtain = document.getElementById('techCurtain');
     const tiles = Array.from(document.querySelectorAll('.tech-tile'));
     const matches = tiles.filter(t => cat === 'all' || t.dataset.cat === cat);
     const countEl = document.getElementById('techCount');
+    const duration = 950;
 
-    tiles.forEach(t => {
-      t.classList.add('tech-hidden');
-      t.classList.remove('tile-drop');
+    // Lay out only the matching tiles (so the grid height is correct) but keep them invisible.
+    tiles.forEach(t => t.classList.add('tech-hidden'));
+    matches.forEach(t => {
+      t.classList.remove('tech-hidden');
+      t.classList.add('tile-pre');
     });
 
     if (matches.length === 0) {
+      curtain.style.display = 'none';
       countEl.textContent = 'Showing 0 of ' + tiles.length + ' Technologies';
       return;
     }
 
+    void wrap.offsetHeight; // reflow so heights below are accurate
+    const gridHeight = wrap.offsetHeight;
+
+    // Drop the curtain fully over the grid, no transition, then slide it down and off.
+    curtain.style.transition = 'none';
+    curtain.style.display = 'block';
+    curtain.style.transform = 'translateY(0)';
+    void curtain.offsetHeight; // reflow
+
     countEl.textContent = 'Revealing 0 of ' + tiles.length + ' Technologies';
+
     matches.forEach((t, i) => {
-      const timer = setTimeout(() => {
-        t.classList.remove('tech-hidden');
-        void t.offsetWidth; // restart animation
-        t.classList.add('tile-drop');
+      const ratio = gridHeight > 0 ? Math.min(t.offsetTop / gridHeight, 0.9) : 0;
+      setTimeout(() => {
+        t.classList.remove('tile-pre');
         countEl.textContent = 'Showing ' + (i + 1) + ' of ' + tiles.length + ' Technologies';
-      }, i * 65);
-      techTimers.push(timer);
+      }, ratio * duration);
     });
+
+    requestAnimationFrame(() => {
+      curtain.style.transition = 'transform ' + duration + 'ms cubic-bezier(.62,0,.38,1)';
+      curtain.style.transform = 'translateY(100%)';
+    });
+
+    techCurtainTimer = setTimeout(() => {
+      curtain.style.display = 'none';
+      countEl.textContent = 'Showing ' + matches.length + ' of ' + tiles.length + ' Technologies';
+    }, duration + 80);
   }
 
   // Scroll-reveal for cards and headings
